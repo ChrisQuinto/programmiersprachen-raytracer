@@ -14,7 +14,16 @@
 
 struct Color
 {
-  Color(float red, float green, float blue) : r(red), g(green), b(blue) {}
+  Color() :
+  r{0.0},
+  g{0.0},
+  b{0.0} {}
+
+  Color(float red, float green, float blue) :
+  r{red},
+  g{green},
+  b{blue} {}
+
   float r;
   float g;
   float b;
@@ -24,6 +33,12 @@ struct Color
     os << "(" << c.r << "," << c.g << "," << c.b << ")\n";
     return os;
   }
+
+  bool operator==(Color const& other) const
+  {
+    return ((r == other.r) && (g == other.g) && (b == other.b));
+  }
+
 
   Color& operator+=(Color const& other)
   {

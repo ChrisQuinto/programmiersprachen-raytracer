@@ -8,10 +8,10 @@
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
+///
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 /// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -30,9 +30,9 @@
 ///
 /// @defgroup gtx_intersect GLM_GTX_intersect
 /// @ingroup gtx
-/// 
+///
 /// @brief Add intersection functions
-/// 
+///
 /// <glm/gtx/intersect.hpp> need to be included to use these functionalities.
 ///////////////////////////////////////////////////////////////////////////////////
 
@@ -77,7 +77,7 @@ namespace glm
 		genType const & vert0, genType const & vert1, genType const & vert2,
 		genType & position);
 
-	//! Compute the intersection distance of a ray and a sphere. 
+	//! Compute the intersection distance of a ray and a sphere.
 	//! The ray direction vector is unit length.
 	//! From GLM_GTX_intersect extension.
 	template <typename genType>
@@ -100,7 +100,7 @@ namespace glm
 	bool intersectLineSphere(
 		genType const & point0, genType const & point1,
 		genType const & sphereCenter, typename genType::value_type sphereRadius,
-		genType & intersectionPosition1, genType & intersectionNormal1, 
+		genType & intersectionPosition1, genType & intersectionNormal1,
 		genType & intersectionPosition2 = genType(), genType & intersectionNormal2 = genType());
 
 	/// @}

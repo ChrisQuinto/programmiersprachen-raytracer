@@ -1,39 +1,34 @@
 #ifndef SPHERE_BUW_HPP
 #define SPHERE_BUW_HPP
 #include "shape.hpp"
-
-const double PI = 3.141592653589793238463;
+#include "ray.hpp"
 
 class Sphere : public Shape
 {
 public:
-    Sphere() :
-    center_{glm::vec3{0.0,0.0,0.0}},
-    radius_{0.0} {}
+    Sphere();
 
-    Sphere(glm::vec3 const& vec, double r) :
-    center_{vec},
-    radius_{r} {}
+    Sphere(glm::vec3 const& vec, float r);
 
-    glm::vec3 center() {
-        return center_;
-    }
+    Sphere(glm::vec3 const& vec, float r, std::string const& n, Color const& c);
 
-    double radius() {
-        return radius_;
-    }
+    ~Sphere();
 
-    /* virtual */ double area() const {
+    glm::vec3 const& center() const;
 
-    }
+    float radius() const;
 
-    /* virtual */ double volume() const {
-    return (4/3) * M_PI * (radius_ * radius_ * radius_);
-    }
+    bool intersect(Ray const& ray, float& distance) const;
+
+    /* virtual */ float area() const override;
+
+    /* virtual */ float volume() const override;
+
+    /* virtual */ std::ostream& print(std::ostream& os) const override;
 
 private:
     glm::vec3 center_;
-    double radius_;
+    float radius_;
 };
 
 #endif
