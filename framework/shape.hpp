@@ -3,7 +3,7 @@
 #include <glm/vec3.hpp>
 #include <cmath>
 #include <string>
-#include "color.hpp"
+#include "material.hpp"
 
 class Shape
 {
@@ -12,7 +12,7 @@ public:
 
     std::string const& name() const;
 
-    Color const& color() const;
+    Material const& material() const;
 
     virtual float area() const = 0;
 
@@ -23,11 +23,11 @@ public:
 protected:
     Shape();
 
-    Shape(std::string const& n, Color const& c);
+    Shape(std::string const& n, Material const& m);
 
 private:
     std::string name_;
-    Color color_;
+    Material material_;
 };
 
 std::ostream& operator<<(std::ostream& os, Shape const& s); //not a member function

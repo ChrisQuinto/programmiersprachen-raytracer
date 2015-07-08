@@ -1,7 +1,10 @@
 #ifndef BOX_BUW_HPP
 #define BOX_BUW_HPP
+#include <cmath>
+#include <algorithm>
 #include "shape.hpp"
 #include "ray.hpp"
+#include "material.hpp"
 
 class Box : public Shape
 {
@@ -10,7 +13,7 @@ public:
 
     Box(glm::vec3 const& minimum, glm::vec3 const& maximum);
 
-    Box(glm::vec3 const& minimum, glm::vec3 const& maximum, std::string n, Color const& c);
+    Box(glm::vec3 const& minimum, glm::vec3 const& maximum, std::string n, Material const& m);
 
     glm::vec3 const& min() const;
 
@@ -21,6 +24,8 @@ public:
     float length() const;
 
     float hight() const;
+
+    bool intersect(Ray const& ray, float& distance) const;
 
     /* virtual */ float area() const override;
 

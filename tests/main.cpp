@@ -28,10 +28,10 @@ TEST_CASE("test box", "[test box]")
 
     std::cout << std::endl;
     std::string b = "Box3";
-    Color col{};
-    Box box3{glm::vec3{1.0,1.0,1.0}, glm::vec3{2.0,2.0,2.0}, b, col};
+    Material mat{};
+    Box box3{glm::vec3{1.0,1.0,1.0}, glm::vec3{2.0,2.0,2.0}, b, mat};
     REQUIRE(box3.name() == b);
-    REQUIRE(box3.color() == col);
+    REQUIRE(box3.material() == mat);
     std::cout << box3;
 }
 
@@ -42,28 +42,28 @@ TEST_CASE("test sphere", "[test sphere]")
     Sphere sphere0;
     glm::vec3 vec0{};
     std::string a = "noname";
-    Color col{};
+    Material mat{};
     REQUIRE(sphere0.radius() == Approx(0.0));
     REQUIRE(sphere0.center() == vec0);
     REQUIRE(sphere0.name() == a);
-    REQUIRE(sphere0.color() == col);
+    REQUIRE(sphere0.material() == mat);
     std::cout << sphere0;
 
     glm::vec3 vec1{1.0,1.0,1.0};
     std::string b = "sphere1";
-    Sphere sphere1{vec1, 1.0, b, col};
+    Sphere sphere1{vec1, 1.0, b, mat};
     REQUIRE(sphere1.radius() == Approx(1.0));
     REQUIRE(sphere1.center() == vec1);
     REQUIRE(sphere1.name() == b);
-    REQUIRE(sphere1.color() == col);
+    REQUIRE(sphere1.material() == mat);
     REQUIRE(sphere1.area() == Approx(12.5664));
-    REQUIRE(sphere1.volume() == Approx(3.14159));
+    REQUIRE(sphere1.volume() == Approx(4.18879f));
     std::cout << sphere1;
 }
 
-TEST_CASE("intersectRaySphere", "[6.6]")
+TEST_CASE("intersectRaySphere", "[intersectRaySphere]")
 {
-    std::cout << std::endl << "6.6:" << std::endl;
+    std::cout << std::endl << "intersect Ray-Sphere:" << std::endl;
 
     glm::vec3 ray_origin1(0.0,0.0,0.0);
     glm::vec3 ray_direction1(0.0,0.0,1.0);
@@ -74,18 +74,18 @@ TEST_CASE("intersectRaySphere", "[6.6]")
     Ray ray2{ray_origin2,ray_direction2};
 
     float sphere_radius(1.0);
-    Color col{};
+    Material mat{};
     glm::vec3 sphere_center0(0.0,0.0,5.0);
     std::string a = "sphere0";
-    Sphere sphere0{sphere_center0, sphere_radius, a, col};
+    Sphere sphere0{sphere_center0, sphere_radius, a, mat};
 
     glm::vec3 sphere_center1(3.0,1.5,4.5);
     std::string b = "sphere1";
-    Sphere sphere1{sphere_center1, sphere_radius, b, col};
+    Sphere sphere1{sphere_center1, sphere_radius, b, mat};
 
     glm::vec3 sphere_center2(7.0,7.0,7.0);
     std::string c = "sphere2";
-    Sphere sphere2{sphere_center2, sphere_radius, c, col};
+    Sphere sphere2{sphere_center2, sphere_radius, c, mat};
 
     float distance(0.0);
     REQUIRE(sphere0.intersect(ray1, distance) == true);
@@ -94,11 +94,46 @@ TEST_CASE("intersectRaySphere", "[6.6]")
     REQUIRE(sphere2.intersect(ray2, distance) == false);
 }
 
+TEST_CASE("intersectRayBox", "[intersectRayBox]")
+{
+    std::cout << std::endl << "intersect Ray-Box:" << std::endl;
+
+    glm::vec3 ray_origin1(0.0,0.0,0.0);
+    glm::vec3 ray_direction1(1.0,1.0,1.0);
+    Ray ray1{ray_origin1,ray_direction1};
+
+    glm::vec3 ray_origin2(3.0,1.5,4.5);
+    glm::vec3 ray_direction2(-1.0,-1.0,-1.0);
+    Ray ray2{ray_origin2,ray_direction2};
+
+    std::string a = "box0";
+    Material mat{};
+    glm::vec3 box_min0(2.0,2.0,2.0);
+    glm::vec3 box_max0(4.0,4.0,4.0);
+    Box box0{box_min0, box_max0, a, mat};
+
+    std::string b = "box1";
+    glm::vec3 box_min1(3.0,1.5,4.5);
+    glm::vec3 box_max1(1.0,1.0,1.0);
+    Box box1{box_min1, box_max1, b, mat};
+
+    std::string c = "box2";
+    glm::vec3 box_min2(7.0,7.0,7.0);
+    glm::vec3 box_max2(6.0,8.0,6.0);
+    Box box2{box_min2, box_max2, c, mat};
+
+    float distance(0.0);
+    REQUIRE(box0.intersect(ray1, distance) == true);
+    REQUIRE(box1.intersect(ray2, distance) == true);
+    REQUIRE(box2.intersect(ray2, distance) == false);
+}
+
 TEST_CASE("statischer Typ/dynamischer Typ Variable", "[6.7]")
 {
     std::cout << std::endl << "6.7:" << std::endl;
 
-    Color red(255, 0, 0);
+    Color  rot(255,0,0);
+    Material red("ton" ,rot,rot,rot,7.1f);
     glm::vec3 position(0,0,0);
 
     std::shared_ptr<Sphere> s1 = std::make_shared<Sphere>(
@@ -123,11 +158,12 @@ TEST_CASE("destructor", "[6.8]")
 {
     std::cout << std::endl << "6.8:" << std::endl;
 
-    Color red(255, 0, 0);
+
+    Material red("red",Color {255,0,0}, 0.0);
     glm::vec3 position(0,0,0);
 
-    Sphere* s1 = new Sphere(position, 1.2, "sphere0", red);
-    Shape* s2 = new Sphere(position, 1.2, "sphere1", red);
+    Sphere* s1 = new Sphere(position, 1.2f, "sphere0", red);
+    Shape* s2 = new Sphere(position, 1.2f, "sphere1", red);
 
     s1->print(std::cout);
     s2->print(std::cout);

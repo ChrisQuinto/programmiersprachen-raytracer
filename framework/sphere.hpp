@@ -2,6 +2,7 @@
 #define SPHERE_BUW_HPP
 #include "shape.hpp"
 #include "ray.hpp"
+#include "material.hpp"
 
 class Sphere : public Shape
 {
@@ -10,7 +11,7 @@ public:
 
     Sphere(glm::vec3 const& vec, float r);
 
-    Sphere(glm::vec3 const& vec, float r, std::string const& n, Color const& c);
+    Sphere(glm::vec3 const& vec, float r, std::string const& n, Material const& m);
 
     ~Sphere();
 

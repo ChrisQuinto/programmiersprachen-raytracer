@@ -17,8 +17,8 @@ Sphere::Sphere(glm::vec3 const& vec, float r) :
         std::cout << "Konstruktor-Aufruf fuer: " << name() << "\n";
     }
 
-Sphere::Sphere(glm::vec3 const& vec, float r, std::string const& n, Color const& c) :
-    Sphere::Shape(n,c),
+Sphere::Sphere(glm::vec3 const& vec, float r, std::string const& n, Material const& m) :
+    Sphere::Shape(n,m),
     center_{vec},
     radius_{r} {
         std::cout << "Konstruktor-Aufruf fuer: " << name() << "\n";
