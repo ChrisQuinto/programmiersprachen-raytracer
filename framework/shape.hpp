@@ -4,6 +4,7 @@
 #include <cmath>
 #include <string>
 #include "material.hpp"
+#include "ray.hpp"
 
 class Shape
 {
