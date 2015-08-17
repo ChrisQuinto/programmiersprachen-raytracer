@@ -1,8 +1,8 @@
 #ifndef BUW_CAMERA_HPP
 #define BUW_CAMERA_HPP
+#include <glm/vec3.hpp>
 #include <string>
 #include <iostream>
-#include "color.hpp"
 
 class Camera
 {
@@ -13,7 +13,7 @@ public:
     glm::vec3 const& pos() const;
     double const& fovx() const;
     int const& width() const;
-    int const& height() const;
+    int const& heigth() const;
 
 private:
     std::string name_;

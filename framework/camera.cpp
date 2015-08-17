@@ -1,6 +1,6 @@
 #include "camera.hpp"
 
-CAMERA::CAMERA() :
+Camera::Camera() :
     name_{"defaultcam"},
     pos_{0.0,0.0,0.0},
     fovx_{60.0},
@@ -27,5 +27,5 @@ int const& Camera::width() const {
     return width_;
 }
 int const& Camera::heigth() const {
-    return height_;
+    return heigth_;
 }
