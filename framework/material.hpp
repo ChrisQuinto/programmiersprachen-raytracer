@@ -26,4 +26,4 @@ private:
     float m_;
 };
 
-#endif //#define BUW_MATERIAL_HPP
+#endif

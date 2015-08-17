@@ -1,5 +1,5 @@
-#ifndef SHAPE_BUW_HPP
-#define SHAPE_BUW_HPP
+#ifndef BUW_SHAPE_HPP
+#define BUW_SHAPE_HPP
 #include <glm/vec3.hpp>
 #include <cmath>
 #include <string>

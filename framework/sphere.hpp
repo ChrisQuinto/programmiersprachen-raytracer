@@ -1,5 +1,5 @@
-#ifndef SPHERE_BUW_HPP
-#define SPHERE_BUW_HPP
+#ifndef BUW_SPHERE_HPP
+#define BUW_SPHERE_HPP
 #include "shape.hpp"
 #include "ray.hpp"
 #include "material.hpp"
