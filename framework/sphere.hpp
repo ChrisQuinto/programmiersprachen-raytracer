@@ -1,8 +1,6 @@
 #ifndef BUW_SPHERE_HPP
 #define BUW_SPHERE_HPP
 #include "shape.hpp"
-#include "ray.hpp"
-#include "material.hpp"
 
 class Sphere : public Shape
 {

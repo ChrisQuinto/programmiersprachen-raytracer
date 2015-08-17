@@ -1,10 +1,7 @@
 #ifndef BUW_BOX_HPP
 #define BUW_BOX_HPP
-#include <cmath>
 #include <algorithm>
 #include "shape.hpp"
-#include "ray.hpp"
-#include "material.hpp"
 
 class Box : public Shape
 {

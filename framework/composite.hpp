@@ -1,8 +1,6 @@
 #ifndef BUW_COMPOSITE_HPP
 #define BUW_COMPOSITE_HPP
 #include "shape.hpp"
-#include "ray.hpp"
-#include "material.hpp"
 
 class Composite : public Shape
 {
