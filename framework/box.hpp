@@ -1,5 +1,5 @@
-#ifndef BOX_BUW_HPP
-#define BOX_BUW_HPP
+#ifndef BUW_BOX_HPP
+#define BUW_BOX_HPP
 #include <cmath>
 #include <algorithm>
 #include "shape.hpp"
