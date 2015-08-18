@@ -7,12 +7,10 @@ Camera::Camera() :
     width_{640},
     heigth_{480} {}
 
-Camera::Camera(std::string const& n, glm::vec3 const& pos, double const& fovx, int const& w, int const& h) :
+Camera::Camera(std::string const& n, glm::vec3 const& pos, double const& fovx) :
     name_{n},
     pos_{pos},
-    fovx_{fovx},
-    width_{w},
-    heigth_{h} {}
+    fovx_{fovx} {}
 
 std::string const& Camera::name() const {
     return name_;
@@ -22,10 +20,4 @@ glm::vec3 const& Camera::pos() const {
 }
 double const& Camera::fovx() const {
     return fovx_;
-}
-int const& Camera::width() const {
-    return width_;
-}
-int const& Camera::heigth() const {
-    return heigth_;
 }
