@@ -22,9 +22,6 @@ TEST_CASE("test box", "[test box]")
     glm::vec3 p2{3.0,4.0,5.0};
     REQUIRE(box2.min() == p1);
     REQUIRE(box2.max() == p2);
-    REQUIRE(box2.width() == Approx(2.0));
-    REQUIRE(box2.length() == Approx(3.0));
-    REQUIRE(box2.hight() == Approx(4.0));
     REQUIRE(box2.area() == Approx(52.0));
     REQUIRE(box2.volume() == Approx(24.0));
 
