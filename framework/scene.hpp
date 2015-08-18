@@ -12,9 +12,9 @@ struct Scene
 
 
 
-    Camera camera1_;
-    Color al_;
-    Color background_;
+    Camera camera;
+    Color al;
+    Color background;
 };
 
 #endif
