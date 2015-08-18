@@ -21,6 +21,8 @@ Material::Material(std::string const& n, Color const& a, float const& m) :
     ks_{a},
     reflection_{m} {}
 
+Material::~Material() {}
+
 std::string const& Material::name() const{
     return name_;
 }
