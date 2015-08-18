@@ -7,6 +7,32 @@
 #include "box.hpp"
 #include "material.hpp"
 
+TEST_CASE("test material", "[test material]")
+{
+    std::cout << std::endl << "Material Tests:" << std::endl;
+
+    std::cout << "(Default-Konstructor)" <<std::endl;
+    Material mat1;
+    std::string s1 = "noname";
+    Color col1{};
+    REQUIRE(mat1.name() == s1);
+    REQUIRE(mat1.ka() == col1);
+    REQUIRE(mat1.kd() == col1);
+    REQUIRE(mat1.ks() == col1);
+    REQUIRE(mat1.m() == 0);
+    std::cout << mat1;
+
+    std::cout << std::endl << "(Konstructor)" << std::endl;
+    std::string s2 = "mat2";
+    Color col2{1.0f,0.0f,1.0f};
+    Material mat2{s2,col2,col2,col2,1};
+    REQUIRE(mat2.name() == s2);
+    REQUIRE(mat2.ka() == col2);
+    REQUIRE(mat2.kd() == col2);
+    REQUIRE(mat2.ks() == col2);
+    REQUIRE(mat2.m() == 1);
+    std::cout << mat2;
+}
 
 TEST_CASE("test box", "[test box]")
 {
