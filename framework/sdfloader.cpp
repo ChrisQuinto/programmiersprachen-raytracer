@@ -75,7 +75,49 @@ Scene Sdfloader::loadscene(std::string file) const{
 
                 if (variable.compare("material") == 0){
 
+                    datei >> name;
+                    float r,g,b;
+
+                    datei >> variable;
+                    flt << variable << ' ';
+                    datei >> variable;
+                    flt << variable << ' ';
+                    datei >> variable;
+                    flt << variable;
+                    flt >> r >> g >> b;
+                    Color ka(r,g,b);
+                    flt.clear();
+
+                    datei >> variable;
+                    flt << variable << ' ';
+                    datei >> variable;
+                    flt << variable << ' ';
+                    datei >> variable;
+                    flt << variable;
+                    flt >> r >> g >> b;
+                    Color kd(r,g,b);
+                    flt.clear();
+
+                    datei >> variable;
+                    flt << variable << ' ';
+                    datei >> variable;
+                    flt << variable << ' ';
+                    datei >> variable;
+                    flt << variable;
+                    flt >> r >> g >> b;
+                    Color ks(r,g,b);
+                    flt.clear();
+
+                    float m;
+                    datei >> variable;
+                    flt << variable;
+                    flt >> m;
+                    flt.clear();
+
+                    Material mat{name, ka, kd, ks, m}
+                    s.material[name] = mat;
                 }
+
                 else if (variable.compare("light") == 0){
 
                 }
