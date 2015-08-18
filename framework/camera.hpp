@@ -19,8 +19,6 @@ private:
     std::string name_;
     glm::vec3 pos_;
     double fovx_;
-    int width_;
-    int heigth_;
 };
 
 
