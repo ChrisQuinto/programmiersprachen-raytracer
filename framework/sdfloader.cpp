@@ -3,16 +3,15 @@
 #include <fstream>
 #include <sstream>
 #include <glm/vec3.hpp>
-#include "sdf_loader.hpp"
+#include <map>
+#include "sdfloader.hpp"
 #include "scene.hpp"
 #include "material.hpp"
 #include "camera.hpp"
-#include "light_source.hpp"
 #include "color.hpp"
 #include "shape.hpp"
-#include "box.hpp"
 #include "sphere.hpp"
-#include <map>
+#include "box.hpp"
 
 Sdfloader::Sdfloader(std::string file): file_{file}{}
 Sdfloader::Sdfloader():file_{""} {}
