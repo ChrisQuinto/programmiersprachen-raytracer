@@ -27,7 +27,7 @@ Material const& Shape::material() const {
 
 std::ostream& Shape::print(std::ostream& os) const {
     os << "Name: " << name() << "\n";
-    os << "Material: " << material();
+    os << material();
     return os;
 }
 

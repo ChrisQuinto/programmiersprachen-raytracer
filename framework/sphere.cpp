@@ -37,7 +37,7 @@ float Sphere::radius() const {
     }
 
 /* virtual */ float Sphere::area() const {
-        return 4 * M_PI * radius_ * radius_;
+        return 4.0f * M_PI * radius_ * radius_;
     }
 
 /* virtual */ float Sphere::volume() const {
