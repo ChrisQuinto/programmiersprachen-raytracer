@@ -3,14 +3,14 @@
 Camera::Camera() :
     name_{"defaultcam"},
     pos_{0.0,0.0,0.0},
-    fovx_{60.0},
-    width_{640},
-    heigth_{480} {}
+    fovx_{60.0f} {}
 
-Camera::Camera(std::string const& n, glm::vec3 const& pos, double const& fovx) :
+Camera::Camera(std::string const& n, float const& fovx) :
     name_{n},
-    pos_{pos},
+    pos_{0.0,0.0,0.0},
     fovx_{fovx} {}
+
+Camera::~Camera() {}
 
 std::string const& Camera::name() const {
     return name_;
@@ -18,6 +18,6 @@ std::string const& Camera::name() const {
 glm::vec3 const& Camera::pos() const {
     return pos_;
 }
-double const& Camera::fovx() const {
+float const& Camera::fovx() const {
     return fovx_;
 }
