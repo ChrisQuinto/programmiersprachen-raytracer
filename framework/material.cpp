@@ -5,22 +5,25 @@ Material::Material() :
     ka_{Color()},
     kd_{Color()},
     ks_{Color()},
-    m_{0} {}
+    reflection_{0} {}
 
 Material::Material(std::string const& n, Color const& a, Color const& d, Color const& s, float const& m) :
     name_{n},
     ka_{a},
     kd_{d},
     ks_{s},
-    m_{m} {}
+    reflection_{m} {}
 
 Material::Material(std::string const& n, Color const& a, float const& m) :
     name_{n},
     ka_{a},
     kd_{a},
     ks_{a},
-    m_{m} {}
+    reflection_{m} {}
 
+std::string const& Material::name() const{
+    return name_;
+}
 Color const& Material::ka() const{
     return ka_;
 }
@@ -31,7 +34,7 @@ Color const& Material::ks() const{
     return ks_;
 }
 float const& Material::m() const{
-    return m_;
+    return reflection_;
 }
 
 std::ostream& operator<<(std::ostream& os, Material const& m)
