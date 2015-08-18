@@ -16,19 +16,13 @@ public:
 
     glm::vec3 const& max() const;
 
-    float width() const;
-
-    float length() const;
-
-    float hight() const;
-
-    bool intersect(Ray const& ray, float& distance) const;
-
     /* virtual */ float area() const override;
 
     /* virtual */ float volume() const override;
 
     /* virtual */ std::ostream& print(std::ostream& os) const override;
+
+    bool intersect(Ray const& ray, float& distance) const;
 
 private:
     glm::vec3 min_;

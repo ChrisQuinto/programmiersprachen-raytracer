@@ -23,24 +23,18 @@ glm::vec3 const& Box::max() const {
     return max_;
 }
 
-float Box::width() const {
-    return abs(max_.x - min_.x);
-}
-
-float Box::length() const {
-    return abs(max_.y - min_.y);
-}
-
-float Box::hight() const {
-    return abs(max_.z - min_.z);
-}
-
 /* virtual */ float Box::area() const {
-    return ((2 * (width() * length())) + (2 * (width() * hight())) + (2 * (length() * hight())));
+    float width = abs(max_.x - min_.x);
+    float length = abs(max_.y - min_.y);
+    float height = abs(max_.z - min_.z);
+    return (2 * width * length + 2 * width * height + 2 * length * height);
 }
 
 /* virtual */ float Box::volume() const {
-    return (width() * length() * hight());
+    float width = abs(max_.x - min_.x);
+    float length = abs(max_.y - min_.y);
+    float height = abs(max_.z - min_.z);
+    return (width * length * height);
 }
 
 /* virtual */ std::ostream& Box::print(std::ostream& os) const {
