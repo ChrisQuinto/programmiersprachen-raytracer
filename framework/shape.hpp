@@ -3,6 +3,7 @@
 #include <glm/vec3.hpp>
 #include <cmath>
 #include <string>
+#include <iostream>
 #include "material.hpp"
 #include "ray.hpp"
 

@@ -5,6 +5,8 @@
 #include "shape.hpp"
 #include "sphere.hpp"
 #include "box.hpp"
+#include "material.hpp"
+
 
 TEST_CASE("test box", "[test box]")
 {
@@ -128,7 +130,8 @@ TEST_CASE("intersectRayBox", "[intersectRayBox]")
     REQUIRE(box2.intersect(ray2, distance) == false);
 }
 
-TEST_CASE("statischer Typ/dynamischer Typ Variable", "[6.7]")
+// AUFGABENBLATT 6
+/*TEST_CASE("statischer Typ/dynamischer Typ Variable", "[6.7]")
 {
     std::cout << std::endl << "6.7:" << std::endl;
 
@@ -174,14 +177,9 @@ TEST_CASE("destructor", "[6.8]")
     //Ohne virtual wird beim Shape-Pointer der Destruktor der Sphere nicht aufgerufen, da hier nur der Destruktor von der Klasse aufgerufen wird auf den der Pointer zeigt.
     //Bei dem Sphere-Pointer werden zwei Destruktoren aufgerufen, da wenn der Destruktor der Sphere aufgerufen wird, auf welche der Pointer zeigt, automatisch auch noch der Destruktor der Basisklasse aufgerufen wird.
     //Wenn man virtual verwendet wird auch für den Shape-Pointer der Destruktor der Sphere-Klasse aufgerufen, da der Destruktor des Pointers virtual und Sphere die abgeleitete Klasse der Basisklasse Shape ist.
-}
+}*/
 
 int main(int argc, char *argv[])
 {
   return Catch::Session().run(argc, argv);
 }
-
-//Unterschied Klassenhierachie - Objekthierachie
-//Bei einer Klassenhierachie setzt sich eine Basisklasse aus abgeleiteten Klassen zusammen, wobei die Children eigene Methoden haben können, allerdings auch auf die Methoden der Klasse zugreifen können.
-//Objekte der Basisklasse können auch durch Objekte der abgeleiteten Klasse ersetzt werden.
-//Instanzen einer Klasse, "die Variablen sind belegt"
