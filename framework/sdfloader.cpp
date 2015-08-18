@@ -12,6 +12,7 @@
 #include "shape.hpp"
 #include "sphere.hpp"
 #include "box.hpp"
+#include <map>
 
 Sdfloader::Sdfloader(std::string file): file_{file}{}
 Sdfloader::Sdfloader():file_{""} {}
@@ -19,7 +20,7 @@ Sdfloader::~Sdfloader(){}
 
 Scene Sdfloader::loadscene(std::string file) const{
 
-      îfstream datei(file, ios::in);
+      std::ifstream datei(file, std::ios::in);
       Scene s{};
 
       std::string variable = " ";
@@ -46,7 +47,7 @@ Scene Sdfloader::loadscene(std::string file) const{
 
             }
 
-            else if (variable.compare("renderer") == 0){
+            /*else if (variable.compare("renderer") == 0){
 
                 datei >> name;
                 std::string camname;//fals der renderer doch angepasst wird
@@ -135,7 +136,7 @@ Scene Sdfloader::loadscene(std::string file) const{
                 }
 
             }
-        }
+        */}
 
 
 
