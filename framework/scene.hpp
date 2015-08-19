@@ -13,13 +13,17 @@ struct Scene
     Scene() :
     camera{Camera{}},
     amblight{Color{}},
-    background{Color{}} {}
+    background{Color{}},
+    renderer{Renderer{}}
+
+    {}
 
     ~Scene() {}
-
+    std::map<std::string, Material> material;
     Camera camera;
     Color amblight;
     Color background;
+    Renderer renderer;
 };
 
 #endif

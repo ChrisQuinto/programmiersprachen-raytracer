@@ -47,24 +47,26 @@ Scene Sdfloader::loadscene(std::string file) const{
 
             }
 
-            /*else if (variable.compare("renderer") == 0){
+            else if (variable.compare("renderer") == 0){
 
-                datei >> name;
-                std::string camname;//fals der renderer doch angepasst wird
-                camname << name;
-                datei >> name;
+                std::string camname;
+                datei >> camname; //fals der renderer doch angepasst wird
+
                 std::string filename;
-                name >> filename;
-                datei >> flt;
-                int xres;
-                int yres;
+                datei >> filename;
+
+                datei >> variable;
+                unsigned xres;
+                unsigned yres;
+                flt << variable;
                 flt >> xres;
                 flt.clear();
-                datei >> flt;
+                datei >> variable;
+                flt << variable;
                 flt >> yres;
                 flt.clear();
 
-                Renderer r{filename, xres, yres};
+                Renderer r{xres, yres, filename};
                 s.renderer = r;
 
             }
@@ -114,7 +116,7 @@ Scene Sdfloader::loadscene(std::string file) const{
                     flt >> m;
                     flt.clear();
 
-                    Material mat{name, ka, kd, ks, m}
+                    Material mat{name, ka, kd, ks, m};
                     s.material[name] = mat;
                 }
 
@@ -136,7 +138,7 @@ Scene Sdfloader::loadscene(std::string file) const{
                 }
 
             }
-        */}
+        }
 
 
 

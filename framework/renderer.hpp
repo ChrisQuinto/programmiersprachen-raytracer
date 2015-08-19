@@ -19,7 +19,8 @@
 class Renderer
 {
 public:
-  Renderer(unsigned w, unsigned h, std::string const& file);
+  Renderer( unsigned w, unsigned h, std::string const& file);
+  Renderer();
 
   void render();
   void write(Pixel const& p);
