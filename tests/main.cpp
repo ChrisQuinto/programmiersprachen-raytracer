@@ -160,7 +160,11 @@ TEST_CASE("Lights_default", "[Lights_default]"){
 
     Light l1;
     std::string s1 = "noname";
+    glm::vec3 pos0(0.0,0.0,0.0);
+    Color c0;
     REQUIRE(l1.name() == "noname");
+    REQUIRE(l1.pos() == pos0);
+    REQUIRE(l1.dl() == c0);
 }
 
 
