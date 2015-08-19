@@ -6,6 +6,7 @@
 #include "sphere.hpp"
 #include "box.hpp"
 #include "material.hpp"
+#include "lights.hpp"
 
 TEST_CASE("test material", "[test material]")
 {
@@ -152,6 +153,16 @@ TEST_CASE("intersectRayBox", "[intersectRayBox]")
     REQUIRE(box1.intersect(ray2, distance) == true);
     REQUIRE(box2.intersect(ray2, distance) == false);
 }
+
+TEST_CASE("Lights_default", "[Lights_default]"){
+
+    std::cout << std::endl << "Tests Lights:" << std::endl;
+
+    Light l1;
+    std::string s1 = "noname";
+    REQUIRE(l1.name() == "noname");
+}
+
 
 // AUFGABENBLATT 6
 /*TEST_CASE("statischer Typ/dynamischer Typ Variable", "[6.7]")

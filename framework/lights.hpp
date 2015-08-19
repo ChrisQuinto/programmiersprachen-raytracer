@@ -9,17 +9,18 @@ class Light
 {
 public:
     Light();
-    Light(std::string const& n, glm::vec3 const& pos, glm::vec3 const& dl);
+    Light(std::string const& n, glm::vec3 const& pos, Color const& dl);
 
-    // glm::vec3 const& pos() const;
-    // glm::vec3 const& dl() const;
+    std::string const& name() const;
+    glm::vec3 const& pos() const;
+    Color const& dl() const;
 
     // friend std::ostream& operator<<(std::ostream& os, Light const& l);
 
 private:
     std::string name_;
     glm::vec3 pos_;
-    glm::vec3 dlight_;
+    Color dlight_;
 };
 
 #endif //#define BUW_LIGHTS_HPP

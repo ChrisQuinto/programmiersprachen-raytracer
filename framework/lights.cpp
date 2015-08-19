@@ -5,17 +5,21 @@ Light::Light() :
     pos_{0.0,0.0,0.0},
     dlight_{0.0,0.0,0.0} {}
 
-Light::Light(std::string const& n, glm::vec3 const& pos, glm::vec3 const& dl) :
+Light::Light(std::string const& n, glm::vec3 const& pos, Color const& dl) :
     name_{n},
     pos_{pos},
     dlight_{dl} {}
 
-/*glm::vec3 const& Light::pos() const{
+std::string const& Light::name() const{
+    return name_;
+}
+
+glm::vec3 const& Light::pos() const{
     return pos_;
-}*/
-/*glm::vec3 const& Light::dl() const{
+}
+Color const& Light::dl() const{
     return dlight_;
-}*/
+}
 
 /*std::ostream& operator<<(std::ostream& os, Light const& l)
   {
