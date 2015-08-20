@@ -1,7 +1,7 @@
 #include "lights.hpp"
 
 Light::Light() :
-    name_{"noname"},
+    name_{"defaultlight"},
     pos_{0.0,0.0,0.0},
     dlight_{0.0,0.0,0.0} {}
 

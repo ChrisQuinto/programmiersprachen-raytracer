@@ -1,7 +1,7 @@
 #include "material.hpp"
 
 Material::Material() :
-    name_{"noname"},
+    name_{"defaultmaterial"},
     ka_{Color()},
     kd_{Color()},
     ks_{Color()},

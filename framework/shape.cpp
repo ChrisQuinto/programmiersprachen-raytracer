@@ -2,7 +2,7 @@
 #include "shape.hpp"
 
 Shape::Shape() :
-    name_("noname"),
+    name_("defaultshape"),
     material_(Material()) {
         std::cout << "Default-Konstruktor-Aufruf fuer: " << name() << "\n";
     }
