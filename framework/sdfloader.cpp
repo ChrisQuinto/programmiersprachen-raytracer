@@ -222,5 +222,6 @@ Scene Sdfloader::loadscene(std::string file) const{
 
       }
 
+      return s;
 
     }
