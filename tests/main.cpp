@@ -15,7 +15,7 @@ TEST_CASE("test material", "[test material]")
 
     std::cout << "(Default-Konstructor)" <<std::endl;
     Material mat1;
-    std::string s1 = "noname";
+    std::string s1 = "defaultmaterial";
     Color col1{};
     REQUIRE(mat1.name() == s1);
     REQUIRE(mat1.ka() == col1);
@@ -68,7 +68,7 @@ TEST_CASE("test sphere", "[test sphere]")
 
     Sphere sphere0;
     glm::vec3 vec0{};
-    std::string a = "noname";
+    std::string a = "defaultshape";
     Material mat{};
     REQUIRE(sphere0.radius() == Approx(0.0));
     REQUIRE(sphere0.center() == vec0);
@@ -160,7 +160,7 @@ TEST_CASE("Lights_default", "[Lights_default]"){
     std::cout << std::endl << "Tests Lights:" << std::endl;
 
     Light l1;
-    std::string s1 = "noname";
+    std::string s1 = "defaultlight";
     glm::vec3 pos0(0.0,0.0,0.0);
     Color c0;
     REQUIRE(l1.name() == s1);
