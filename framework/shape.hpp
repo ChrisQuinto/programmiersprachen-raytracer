@@ -6,6 +6,7 @@
 #include <iostream>
 #include "material.hpp"
 #include "ray.hpp"
+#include "hit.hpp"
 
 class Shape
 {
