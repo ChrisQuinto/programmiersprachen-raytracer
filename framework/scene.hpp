@@ -7,6 +7,10 @@
 #include "material.hpp"
 #include "camera.hpp"
 #include "renderer.hpp"
+#include "lights.hpp"
+#include <memory>
+#include <iostream>
+//#include <string>
 
 struct Scene
 {
@@ -19,7 +23,8 @@ struct Scene
     {}
 
     ~Scene() {}
-    std::map<std::string, Material> material;
+    std::map<std::string, Material> materials;
+    std::vector<std::shared_ptr <Shape>> shapes;
     std::vector<Light> lights;
     Camera camera;
     Color amblight;

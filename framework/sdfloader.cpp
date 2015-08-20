@@ -12,7 +12,7 @@
 #include "shape.hpp"
 #include "sphere.hpp"
 #include "box.hpp"
-#include <map>
+
 
 Sdfloader::Sdfloader(std::string file): file_{file}{}
 Sdfloader::Sdfloader():file_{""} {}
@@ -117,7 +117,7 @@ Scene Sdfloader::loadscene(std::string file) const{
                     flt.clear();
 
                     Material mat{name, ka, kd, ks, m};
-                    s.material[name] = mat;
+                    s.materials[name] = mat;
                 }
 
                 else if (variable.compare("light") == 0){
@@ -135,6 +135,7 @@ Scene Sdfloader::loadscene(std::string file) const{
                     glm::vec3 pos(x,y,z);
                     flt.clear();
 
+                    float r, g, b;
                     datei >> variable;
                     flt << variable << ' ';
                     datei >> variable;
@@ -156,9 +157,59 @@ Scene Sdfloader::loadscene(std::string file) const{
 
                     if (variable.compare("box") == 0){
 
+                        datei >> name;
+                        float x, y, z;
+                        datei >> variable;
+                        flt << variable << ' ';
+                        datei >> variable;
+                        flt << variable << ' ';
+                        datei >> variable;
+                        flt << variable;
+                        flt >> x >> y >> z;
+                        glm::vec3 p1(x,y,z);
+                        flt.clear();
+
+                        datei >> variable;
+                        flt << variable << ' ';
+                        datei >> variable;
+                        flt << variable << ' ';
+                        datei >> variable;
+                        flt << variable;
+                        flt >> x >> y >> z;
+                        glm::vec3 p2(x,y,z);
+                        flt.clear();
+
+                        datei >> variable;
+
+                        std::shared_ptr<Shape> b(new Box(p1, p2,name, s.materials[variable]));
+                        s.shapes.push_back(b);
+
                     }
 
                     if (variable.compare("sphere") == 0){
+
+                        datei >> name;
+
+                        float x, y, z;
+                        datei >> variable;
+                        flt << variable << ' ';
+                        datei >> variable;
+                        flt << variable << ' ';
+                        datei >> variable;
+                        flt << variable;
+                        flt >> x >> y >> z;
+                        glm::vec3 pos(x,y,z);
+                        flt.clear();
+
+                        datei >> variable;
+                        flt << variable;
+                        float r;
+                        flt >> r;
+
+                        datei >> variable;
+
+                        std::shared_ptr<Shape> sphere(new Sphere(pos, r,name, s.materials[variable]));
+                        s.shapes.push_back(sphere);
 
                     }
 
