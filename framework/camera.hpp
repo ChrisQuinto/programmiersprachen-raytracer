@@ -14,6 +14,8 @@ public:
     glm::vec3 const& pos() const;
     float const& fovx() const;
 
+    friend std::ostream& operator<<(std::ostream& os, Camera const& c);
+
 private:
     std::string name_;
     glm::vec3 pos_;

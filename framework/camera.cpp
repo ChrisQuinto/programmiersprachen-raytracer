@@ -21,3 +21,12 @@ glm::vec3 const& Camera::pos() const {
 float const& Camera::fovx() const {
     return fovx_;
 }
+
+std::ostream& operator<<(std::ostream& os, Camera const& c)
+  {
+    os << "Camera: \n"
+       << "Name: " << c.name() << "\n"
+       << "Position: " << c.pos()
+       << "Winkel: "<< c.fovx() <<"\n";
+    return os;
+  }
