@@ -23,6 +23,7 @@ public:
     bool operator==(Material const& m2) const{
       return ((ka() == m2.ka()) && (kd() == m2.kd()) && (ks() == m2.ks()));
     }
+
 private:
     std::string name_;
     Color ka_;
