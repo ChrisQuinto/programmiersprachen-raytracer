@@ -27,7 +27,7 @@ Scene Sdfloader::loadscene(std::string file) const{
       std::string name = " ";
       std::stringstream flt;
       if (datei.good()){
-
+        std::cout << "im good" << std::endl;
         while(datei >> variable){
             if (variable.compare("#") == 0){
               //Zeile überspringen
@@ -120,6 +120,40 @@ Scene Sdfloader::loadscene(std::string file) const{
                     s.materials[name] = mat;
                 }
 
+                else if (variable.compare("amblight") == 0){
+
+                    float r,g,b;
+
+                    datei >> variable;
+                    flt << variable << ' ';
+                    datei >> variable;
+                    flt << variable << ' ';
+                    datei >> variable;
+                    flt << variable;
+                    flt >> r >> g >> b;
+                    Color amb(r,g,b);
+                    flt.clear();
+
+                    s.amblight = amb;
+
+                }
+
+                else if (variable.compare("background") == 0){
+
+                    float r,g,b;
+
+                    datei >> variable;
+                    flt << variable << ' ';
+                    datei >> variable;
+                    flt << variable << ' ';
+                    datei >> variable;
+                    flt << variable;
+                    flt >> r >> g >> b;
+                    Color back(r,g,b);
+                    flt.clear();
+
+                    s.background = back;
+                }
                 else if (variable.compare("light") == 0){
 
                     datei >> name;
@@ -221,7 +255,12 @@ Scene Sdfloader::loadscene(std::string file) const{
 
 
       }
-
+      else if (datei.fail()){
+          std::cout << "bad input" << std::endl;
+      }
+      else{
+          std::cout << "no input my dear" << std::endl;
+      }
       return s;
 
     }

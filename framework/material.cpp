@@ -5,21 +5,21 @@ Material::Material() :
     ka_{Color()},
     kd_{Color()},
     ks_{Color()},
-    reflection_{0} {}
+    reflection_{0} {std::cout << "material " << name() << "\n";}
 
 Material::Material(std::string const& n, Color const& a, Color const& d, Color const& s, float const& m) :
     name_{n},
     ka_{a},
     kd_{d},
     ks_{s},
-    reflection_{m} {}
+    reflection_{m} {std::cout << "material " << name() << "\n";}
 
 Material::Material(std::string const& n, Color const& a, float const& m) :
     name_{n},
     ka_{a},
     kd_{a},
     ks_{a},
-    reflection_{m} {}
+    reflection_{m} {std::cout << "material " << name() << "\n";}
 
 Material::~Material() {}
 

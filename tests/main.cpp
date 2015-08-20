@@ -183,13 +183,26 @@ TEST_CASE("Camera_default", "[Camera_default]"){
     REQUIRE(c1.fovx() == fovx);
 }
 
-TEST_CASE("Sdf_loader_material", "[sdf_loader]"){
+TEST_CASE("Sdfloader_material", "[sdfloader]"){
 
     Sdfloader loader{"./materials.txt"};
     Scene s = loader.loadscene("./materials.txt");
-    for(std::map<std::string, Material>::iterator it = s.materials.begin(); it != s.materials.end(); ++it){
-        std::cout << it->second << std::endl;
-    }
+
+}
+
+TEST_CASE("Sdfloader Test", "[sdfloader test]"){
+
+    Sdfloader loader{"./test.txt"};
+    Scene s = loader.loadscene("./test.txt");
+    std::cout << s.amblight << std::endl;
+    std::cout << s.background << std::endl;
+    std::cout << s.materials["red"] << std::endl;
+    std::cout << s.materials["blue"] << std::endl;
+    std::cout << *s.shapes[0] << std::endl;
+    std::cout << *s.shapes[1] << std::endl;
+    std::cout << s.camera << std::endl;
+
+
 }
 
 // AUFGABENBLATT 6

@@ -20,7 +20,7 @@ struct Scene
     background{Color{}},
     renderer{Renderer{}}
 
-    {}
+    {std::cout << "scene built" << std::endl;}
 
     ~Scene() {}
     std::map<std::string, Material> materials;
@@ -30,6 +30,7 @@ struct Scene
     Color amblight;
     Color background;
     Renderer renderer;
+
 };
 
 #endif
