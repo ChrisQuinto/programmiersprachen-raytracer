@@ -45,11 +45,12 @@ float Sphere::radius() const {
     }
 
 /* virtual */ std::ostream& Sphere::print(std::ostream& os) const {
+    os << "Sphere: \n";
     Shape::print(os); //Erweiterung
     os << "Mittelpunkt: (" << center().x << "," << center().y << "," << center().z << ") \n";
     os << "Radius: " << radius() << "\n";
     os << "Flaecheninhalt: " << area() << "\n";
-    os << "Volumen: " << volume() << "\n \n";
+    os << "Volumen: " << volume() << "\n\n";
     return os;
 }
 

@@ -38,11 +38,12 @@ glm::vec3 const& Box::max() const {
 }
 
 /* virtual */ std::ostream& Box::print(std::ostream& os) const {
+    os << "Box: \n";
     Shape::print(os);
     os << "Minimum: (" << min().x << "," << min().y << "," << min().z << ") \n";
     os << "Maximum: (" << max().x << "," << max().y << "," << max().z << ") \n";
     os << "Flaecheninhalt: " << area() << "\n";
-    os << "Volumen: " << volume() << "\n \n";
+    os << "Volumen: " << volume() << "\n\n";
     return os;
 }
 

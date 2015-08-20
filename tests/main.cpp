@@ -13,7 +13,7 @@
 
 TEST_CASE("test material", "[test material]")
 {
-    std::cout << std::endl << "Material Tests:" << std::endl;
+    std::cout << std::endl << "Material Tests: " << std::endl;
 
     std::cout << "(Default-Konstructor)" <<std::endl;
     Material mat1;
@@ -40,7 +40,7 @@ TEST_CASE("test material", "[test material]")
 
 TEST_CASE("test box", "[test box]")
 {
-    std::cout << std::endl << "Box Tests:" << std::endl;
+    std::cout << std::endl << "Box Tests: " << std::endl;
 
     Box box1;
     glm::vec3 vec3{};
@@ -66,7 +66,7 @@ TEST_CASE("test box", "[test box]")
 
 TEST_CASE("test sphere", "[test sphere]")
 {
-    std::cout << std::endl << "Sphere Tests:" << std::endl;
+    std::cout << std::endl << "Sphere Tests: " << std::endl;
 
     Sphere sphere0;
     glm::vec3 vec0{};
@@ -90,9 +90,9 @@ TEST_CASE("test sphere", "[test sphere]")
     std::cout << sphere1;
 }
 
-TEST_CASE("intersectRaySphere", "[intersectRaySphere]")
+TEST_CASE("test intersectRaySphere", "[test intersectRaySphere]")
 {
-    std::cout << std::endl << "intersect Ray-Sphere:" << std::endl;
+    std::cout << std::endl << "Intersect-Ray-Sphere Tests: " << std::endl;
 
     glm::vec3 ray_origin1(0.0,0.0,0.0);
     glm::vec3 ray_direction1(0.0,0.0,1.0);
@@ -123,9 +123,9 @@ TEST_CASE("intersectRaySphere", "[intersectRaySphere]")
     REQUIRE(sphere2.intersect(ray2, distance) == false);
 }
 
-TEST_CASE("intersectRayBox", "[intersectRayBox]")
+TEST_CASE("test intersectRayBox", "[test intersectRayBox]")
 {
-    std::cout << std::endl << "intersect Ray-Box:" << std::endl;
+    std::cout << std::endl << "Intersect-Ray-Box Tests: " << std::endl;
 
     glm::vec3 ray_origin1(0.0,0.0,0.0);
     glm::vec3 ray_direction1(1.0,1.0,1.0);
@@ -157,52 +157,51 @@ TEST_CASE("intersectRayBox", "[intersectRayBox]")
     REQUIRE(box2.intersect(ray2, distance) == false);
 }
 
-TEST_CASE("Lights_default", "[Lights_default]"){
+TEST_CASE("test light", "[test light]"){
+    std::cout << std::endl << "Light Tests: " << std::endl;
 
-    std::cout << std::endl << "Tests Lights:" << std::endl;
-
-    Light l1;
+    std::cout << "(Default-Konstructor)" <<std::endl;
+    Light light1;
     std::string s1 = "defaultlight";
     glm::vec3 pos0(0.0,0.0,0.0);
     Color c0;
-    REQUIRE(l1.name() == s1);
-    REQUIRE(l1.pos() == pos0);
-    REQUIRE(l1.dl() == c0);
+    REQUIRE(light1.name() == s1);
+    REQUIRE(light1.pos() == pos0);
+    REQUIRE(light1.dl() == c0);
+    std::cout << light1;
 }
 
-TEST_CASE("Camera_default", "[Camera_default]"){
+TEST_CASE("test camera", "[test camera]"){
+    std::cout << "Camera Tests: " << std::endl;
 
-    std::cout << std::endl << "Tests Camera:" << std::endl;
-
-    Camera c1;
+    std::cout << "(Default-Konstructor)" <<std::endl;
+    Camera cam1;
     std::string s1 = "defaultcam";
     glm::vec3 pos0(0.0,0.0,0.0);
     float fovx = 60.0f;
-    REQUIRE(c1.name() == s1);
-    REQUIRE(c1.pos() == pos0);
-    REQUIRE(c1.fovx() == fovx);
+    REQUIRE(cam1.name() == s1);
+    REQUIRE(cam1.pos() == pos0);
+    REQUIRE(cam1.fovx() == fovx);
+    std::cout << cam1;
 }
 
-TEST_CASE("Sdfloader_material", "[sdfloader]"){
-
+TEST_CASE("sdfloader_material", "[sdfloader]"){
     Sdfloader loader{"./materials.txt"};
     Scene s = loader.loadscene("./materials.txt");
-
 }
 
-TEST_CASE("Sdfloader Test", "[sdfloader test]"){
-
+TEST_CASE("sdfloader Test", "[sdfloader test]"){
     Sdfloader loader{"./test.txt"};
     Scene s = loader.loadscene("./test.txt");
-    std::cout << s.amblight << std::endl;
-    std::cout << s.background << std::endl;
+    std::cout << "\n" ;
+    std::cout << "Ambientes Licht: \n" << s.amblight << std::endl;
+    std::cout << "Background-Color: \n" << s.background << std::endl;
     std::cout << s.materials["red"] << std::endl;
     std::cout << s.materials["blue"] << std::endl;
-    std::cout << *s.shapes[0] << std::endl;
-    std::cout << *s.shapes[1] << std::endl;
-    std::cout << s.camera << std::endl;
-
-
+    std::cout << *s.shapes[0];
+    std::cout << *s.shapes[1];
+    std::cout << s.camera;
+    std::cout << s.lights[0];
 }
 
 // AUFGABENBLATT 6

@@ -15,7 +15,7 @@ public:
     glm::vec3 const& pos() const;
     Color const& dl() const;
 
-    // friend std::ostream& operator<<(std::ostream& os, Light const& l);
+    friend std::ostream& operator<<(std::ostream& os, Light const& l);
 
 private:
     std::string name_;
@@ -23,4 +23,4 @@ private:
     Color dlight_;
 };
 
-#endif //#define BUW_LIGHTS_HPP
+#endif
