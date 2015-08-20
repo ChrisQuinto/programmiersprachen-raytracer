@@ -122,6 +122,33 @@ Scene Sdfloader::loadscene(std::string file) const{
 
                 else if (variable.compare("light") == 0){
 
+                    datei >> name;
+
+                    float x, y, z;
+                    datei >> variable;
+                    flt << variable << ' ';
+                    datei >> variable;
+                    flt << variable << ' ';
+                    datei >> variable;
+                    flt << variable;
+                    flt >> x >> y >> z;
+                    glm::vec3 pos(x,y,z);
+                    flt.clear();
+
+                    datei >> variable;
+                    flt << variable << ' ';
+                    datei >> variable;
+                    flt << variable << ' ';
+                    datei >> variable;
+                    flt << variable;
+                    flt >> r >> g >> b;
+                    Color ld(r,g,b);
+                    flt.clear();
+
+
+                    Light light(name, pos, ld);
+                    s.lights.push_back(light);
+
                 }
                 else if (variable.compare("shape") == 0){
 

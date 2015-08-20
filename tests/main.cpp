@@ -7,6 +7,7 @@
 #include "box.hpp"
 #include "material.hpp"
 #include "lights.hpp"
+#include "camera.hpp"
 
 TEST_CASE("test material", "[test material]")
 {
@@ -162,11 +163,23 @@ TEST_CASE("Lights_default", "[Lights_default]"){
     std::string s1 = "noname";
     glm::vec3 pos0(0.0,0.0,0.0);
     Color c0;
-    REQUIRE(l1.name() == "noname");
+    REQUIRE(l1.name() == s1);
     REQUIRE(l1.pos() == pos0);
     REQUIRE(l1.dl() == c0);
 }
 
+TEST_CASE("Camera_default", "[Camera_default]"){
+
+    std::cout << std::endl << "Tests Camera:" << std::endl;
+
+    Camera c1;
+    std::string s1 = "defaultcam";
+    glm::vec3 pos0(0.0,0.0,0.0);
+    float fovx = 60.0f;
+    REQUIRE(c1.name() == s1);
+    REQUIRE(c1.pos() == pos0);
+    REQUIRE(c1.fovx() == fovx);
+}
 
 // AUFGABENBLATT 6
 /*TEST_CASE("statischer Typ/dynamischer Typ Variable", "[6.7]")
