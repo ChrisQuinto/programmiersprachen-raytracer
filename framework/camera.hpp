@@ -2,6 +2,7 @@
 #define BUW_CAMERA_HPP
 #include <glm/vec3.hpp>
 #include <string>
+#include <iostream>
 
 class Camera
 {
