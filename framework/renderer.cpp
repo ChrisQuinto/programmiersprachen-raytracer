@@ -20,7 +20,7 @@ Renderer::Renderer(unsigned w, unsigned h, std::string const& file)
 Renderer::Renderer()
   : width_(0)
   , height_(0)
-  , colorbuffer_(0, Color(0.0, 0.0, 0.0))
+  , colorbuffer_(w*h, Color(0.0, 0.0, 0.0))
   , filename_("")
   , ppm_(width_, height_)
 {}
