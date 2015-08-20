@@ -42,7 +42,7 @@ float const& Material::m() const{
 std::ostream& operator<<(std::ostream& os, Material const& m)
   {
     os << "Material: \n"
-       << "Name: " << m.name_ << "\n"
+       << "Name: " << m.name() << "\n"
        << "Ambiente Reflexion: " << m.ka()
        << "Diffuse Reflexion: "<< m.kd()
        << "Spiegelnde Reflexion: " << m.ks()
