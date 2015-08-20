@@ -8,6 +8,8 @@
 #include "material.hpp"
 #include "lights.hpp"
 #include "camera.hpp"
+#include "sdfloader.hpp"
+
 
 TEST_CASE("test material", "[test material]")
 {
@@ -179,6 +181,15 @@ TEST_CASE("Camera_default", "[Camera_default]"){
     REQUIRE(c1.name() == s1);
     REQUIRE(c1.pos() == pos0);
     REQUIRE(c1.fovx() == fovx);
+}
+
+TEST_CASE("Sdf_loader_material", "[sdf_loader]"){
+
+    Sdfloader loader{"./materials.txt"};
+    Scene s = loader.loadscene("./materials.txt");
+    for(std::map<std::string, Material>::iterator it = s.materials.begin(); it != s.materials.end(); ++it){
+        std::cout << it->second << std::endl;
+    }
 }
 
 // AUFGABENBLATT 6
