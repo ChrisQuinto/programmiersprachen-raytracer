@@ -3,6 +3,8 @@
 #include <glm/vec3.hpp>
 #include <string>
 #include <iostream>
+#include "ray.hpp"
+
 
 class Camera
 {
@@ -14,6 +16,7 @@ public:
     std::string const& name() const;
     glm::vec3 const& pos() const;
     float const& fovx() const;
+    Ray const castray(glm::vec3 d);
 
     friend std::ostream& operator<<(std::ostream& os, Camera const& c);
 

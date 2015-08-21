@@ -22,6 +22,11 @@ float const& Camera::fovx() const {
     return fovx_;
 }
 
+Ray const Camera::castray(glm::vec3 d) {
+  Ray r1(pos_, d);
+  return r1;
+}
+
 std::ostream& operator<<(std::ostream& os, Camera const& c)
   {
     os << "Camera: \n"
