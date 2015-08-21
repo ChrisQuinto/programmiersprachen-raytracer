@@ -20,7 +20,7 @@ struct Scene
     background{Color{}},
     renderer{Renderer{}}
 
-    {std::cout << "scene built" << std::endl;}
+    {std::cout << "Scene built." << std::endl;}
 
     ~Scene() {}
     std::map<std::string, Material> materials;

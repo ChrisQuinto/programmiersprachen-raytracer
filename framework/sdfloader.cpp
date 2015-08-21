@@ -13,21 +13,25 @@
 #include "sphere.hpp"
 #include "box.hpp"
 
+Sdfloader::Sdfloader() :
+    file_{""} {}
 
-Sdfloader::Sdfloader(std::string file): file_{file}{}
-Sdfloader::Sdfloader():file_{""} {}
-Sdfloader::~Sdfloader(){}
+Sdfloader::Sdfloader(std::string file) :
+    file_{file} {}
+
+Sdfloader::~Sdfloader() {}
 
 Scene Sdfloader::loadscene(std::string file) const{
 
       std::ifstream datei(file, std::ios::in);
-      Scene s{};
+      Scene scene{};
 
       std::string variable = " ";
       std::string name = " ";
       std::stringstream flt;
+
       if (datei.good()){
-        std::cout << "im good" << std::endl;
+        std::cout << "File is good." << std::endl;
         while(datei >> variable){
             if (variable.compare("#") == 0){
               //Zeile überspringen
@@ -43,7 +47,7 @@ Scene Sdfloader::loadscene(std::string file) const{
                 flt.clear();
 
                 Camera c{name, fovx};
-                s.camera = c;
+                scene.camera = c;
 
             }
 
@@ -67,7 +71,7 @@ Scene Sdfloader::loadscene(std::string file) const{
                 flt.clear();
 
                 Renderer r{xres, yres, filename};
-                s.renderer = r;
+                scene.renderer = r;
 
             }
 
@@ -117,7 +121,7 @@ Scene Sdfloader::loadscene(std::string file) const{
                     flt.clear();
 
                     Material mat{name, ka, kd, ks, m};
-                    s.materials[name] = mat;
+                    scene.materials[name] = mat;
                 }
 
                 else if (variable.compare("amblight") == 0){
@@ -134,7 +138,7 @@ Scene Sdfloader::loadscene(std::string file) const{
                     Color amb(r,g,b);
                     flt.clear();
 
-                    s.amblight = amb;
+                    scene.amblight = amb;
 
                 }
 
@@ -152,7 +156,7 @@ Scene Sdfloader::loadscene(std::string file) const{
                     Color back(r,g,b);
                     flt.clear();
 
-                    s.background = back;
+                    scene.background = back;
                 }
                 else if (variable.compare("light") == 0){
 
@@ -182,7 +186,7 @@ Scene Sdfloader::loadscene(std::string file) const{
 
 
                     Light light(name, pos, ld);
-                    s.lights.push_back(light);
+                    scene.lights.push_back(light);
 
                 }
                 else if (variable.compare("shape") == 0){
@@ -215,8 +219,8 @@ Scene Sdfloader::loadscene(std::string file) const{
 
                         datei >> variable;
 
-                        std::shared_ptr<Shape> b(new Box(p1, p2,name, s.materials[variable]));
-                        s.shapes.push_back(b);
+                        std::shared_ptr<Shape> b(new Box(p1, p2,name, scene.materials[variable]));
+                        scene.shapes.push_back(b);
 
                     }
 
@@ -242,25 +246,25 @@ Scene Sdfloader::loadscene(std::string file) const{
 
                         datei >> variable;
 
-                        std::shared_ptr<Shape> sphere(new Sphere(pos, r,name, s.materials[variable]));
-                        s.shapes.push_back(sphere);
+                        std::shared_ptr<Shape> sphere(new Sphere(pos, r,name, scene.materials[variable]));
+                        scene.shapes.push_back(sphere);
 
                     }
 
                 }
 
             }
+
         }
 
-
-
       }
+
       else if (datei.fail()){
-          std::cout << "bad input" << std::endl;
+          std::cout << "File is bad." << std::endl;
       }
       else{
-          std::cout << "no input my dear" << std::endl;
+          std::cout << "No file found." << std::endl;
       }
-      return s;
+      return scene;
 
     }
