@@ -6,7 +6,7 @@
 #include "sphere.hpp"
 #include "box.hpp"
 #include "material.hpp"
-#include "lights.hpp"
+#include "light.hpp"
 #include "camera.hpp"
 #include "sdfloader.hpp"
 

@@ -7,7 +7,7 @@
 #include "material.hpp"
 #include "camera.hpp"
 #include "renderer.hpp"
-#include "lights.hpp"
+#include "light.hpp"
 #include <memory>
 #include <iostream>
 //#include <string>

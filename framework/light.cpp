@@ -1,4 +1,4 @@
-#include "lights.hpp"
+#include "light.hpp"
 
 Light::Light() :
     name_{"defaultlight"},

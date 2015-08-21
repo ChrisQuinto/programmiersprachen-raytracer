@@ -1,5 +1,5 @@
-#ifndef BUW_LIGHTS_HPP
-#define BUW_LIGHTS_HPP
+#ifndef BUW_LIGHT_HPP
+#define BUW_LIGHT_HPP
 #include <glm/vec3.hpp>
 #include <string>
 #include <iostream>
