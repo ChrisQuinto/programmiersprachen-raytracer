@@ -12,6 +12,8 @@ public:
 
     Box(glm::vec3 const& minimum, glm::vec3 const& maximum, std::string n, Material const& m);
 
+    ~Box();
+
     glm::vec3 const& min() const;
 
     glm::vec3 const& max() const;
