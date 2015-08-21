@@ -7,25 +7,25 @@ Sphere::Sphere() :
     Sphere::Shape(),
     center_{glm::vec3{0.0,0.0,0.0}},
     radius_{0.0} {
-        std::cout << "Default-Konstruktor-Aufruf fuer: " << name() << "\n";
+        // std::cout << "Default-Konstruktor-Aufruf fuer: " << name() << "\n";
     }
 
 Sphere::Sphere(glm::vec3 const& vec, float r) :
     Sphere::Shape(),
     center_{vec},
     radius_{r} {
-        std::cout << "Konstruktor-Aufruf fuer: " << name() << "\n";
+        // std::cout << "Konstruktor-Aufruf fuer: " << name() << "\n";
     }
 
 Sphere::Sphere(glm::vec3 const& vec, float r, std::string const& n, Material const& m) :
     Sphere::Shape(n,m),
     center_{vec},
     radius_{r} {
-        std::cout << "Konstruktor-Aufruf fuer: " << name() << "\n";
+        // std::cout << "Konstruktor-Aufruf fuer: " << name() << "\n";
     }
 
 Sphere::~Sphere() {
-    std::cout << "Destruktor-Aufruf fuer: " << name() << "\n";
+    // std::cout << "Destruktor-Aufruf fuer: " << name() << "\n";
 }
 
 glm::vec3 const& Sphere::center() const {
