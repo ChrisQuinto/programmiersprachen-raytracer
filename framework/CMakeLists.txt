@@ -6,7 +6,11 @@ source_group("Inline Files" FILES ${FRAMEWORK_INLINE})
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/..)
 
-add_library(${FRAMEWORK_NAME} STATIC glew.c
-  ${FRAMEWORK_SOURCE}
-  ${FRAMEWORK_INLINE}
-  ${FRAMEWORK_HEADER})
+add_library(
+    ${FRAMEWORK_NAME}
+    STATIC
+    glew.c
+    ${FRAMEWORK_SOURCE}
+    ${FRAMEWORK_INLINE}
+    ${FRAMEWORK_HEADER}
+)

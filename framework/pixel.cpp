@@ -7,14 +7,13 @@
 // Pixel
 // -----------------------------------------------------------------------------
 
-#include "pixel.hpp"
 #include <ostream>
+#include "pixel.hpp"
 
-Pixel::Pixel(unsigned int a, unsigned int b)
-  : x(a),
+Pixel::Pixel(unsigned int a, unsigned int b) :
+    x(a),
     y(b),
-    color(0,0,0)
-{}
+    color(0,0,0) {}
 
 void Pixel::print(std::ostream& os) const
 {
@@ -26,8 +25,10 @@ void Pixel::print(std::ostream& os) const
 
 std::ostream& operator<<(std::ostream& os, const Pixel& a)
 {
-  std::ostream::sentry cerberus (os);
-  if (cerberus)
-    a.print(os);
-  return os;
+    std::ostream::sentry cerberus (os);
+    if (cerberus)
+      a.print(os);
+    return os;
 }
+
+//Endversion
