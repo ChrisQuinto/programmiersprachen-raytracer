@@ -5,23 +5,31 @@ Material::Material() :
     ka_{Color()},
     kd_{Color()},
     ks_{Color()},
-    reflection_{0} {std::cout << "material " << name() << "\n";}
+    reflection_{0} {
+        // std::cout << "Default-Konstruktor-Aufruf fuer Material: " << name() << "\n";
+    }
 
 Material::Material(std::string const& n, Color const& a, Color const& d, Color const& s, float const& m) :
     name_{n},
     ka_{a},
     kd_{d},
     ks_{s},
-    reflection_{m} {std::cout << "material " << name() << "\n";}
+    reflection_{m} {
+        // std::cout << "Konstruktor-Aufruf fuer Material: " << name() << "\n";
+    }
 
 Material::Material(std::string const& n, Color const& a, float const& m) :
     name_{n},
     ka_{a},
     kd_{a},
     ks_{a},
-    reflection_{m} {std::cout << "material " << name() << "\n";}
+    reflection_{m} {
+        // std::cout << "Konstruktor-Aufruf fuer Material: " << name() << "\n";
+    }
 
-Material::~Material() {}
+Material::~Material() {
+        // std::cout << "Destruktor-Aufruf fuer Material: " << name() << "\n";
+    }
 
 std::string const& Material::name() const{
     return name_;

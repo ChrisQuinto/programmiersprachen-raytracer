@@ -3,17 +3,17 @@
 Shape::Shape() :
     name_("defaultshape"),
     material_{Material{}} {
-        // std::cout << "Default-Konstruktor-Aufruf fuer: " << name() << "\n";
+        // std::cout << "Default-Konstruktor-Aufruf fuer Shape: " << name() << "\n";
     }
 
 Shape::Shape(std::string const& n, Material const& m) :
     name_(n),
     material_{m} {
-        // std::cout << "Konstruktor-Aufruf fuer: " << name() << "\n";
+        // std::cout << "Konstruktor-Aufruf fuer Shape: " << name() << "\n";
     }
 
 Shape::~Shape() {
-        // std::cout << "Destruktor-Aufruf fuer: " << name() << "\n";
+        // std::cout << "Destruktor-Aufruf fuer Shape: " << name() << "\n";
 }
 
 std::string const& Shape::name() const {
