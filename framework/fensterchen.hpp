@@ -13,4 +13,6 @@
 #include "color.hpp"
 #include "window.hpp"
 
-#endif // BUW_FENSTERCHEN_HPP
+#endif
+
+//Endversion
