@@ -4,14 +4,13 @@
 #include <sstream>
 #include <glm/vec3.hpp>
 #include <map>
+#include "box.hpp"
 #include "sdfloader.hpp"
 #include "scene.hpp"
 #include "material.hpp"
 #include "camera.hpp"
 #include "color.hpp"
-#include "shape.hpp"
 #include "sphere.hpp"
-#include "box.hpp"
 
 Sdfloader::Sdfloader() :
     file_{""} {}
@@ -26,22 +25,21 @@ Scene Sdfloader::loadscene(std::string file) const{
       std::ifstream datei(file, std::ios::in);
       Scene scene{};
 
-      std::string variable = " ";
-      std::string name = " ";
+      std::string line, name;
       std::stringstream flt;
 
       if (datei.good()){
         std::cout << "File is good." << std::endl;
-        while(datei >> variable){
-            if (variable.compare("#") == 0){
-              //Zeile überspringen
+        while(datei >> line){
+            if (line.compare("#") == 0 || line.compare("") == 0){
+              continue;
             }
 
-            else if (variable.compare("camera") == 0){
+            else if (line.compare("camera") == 0){
 
                 datei >> name;
-                datei >> variable;
-                flt << variable;
+                datei >> line;
+                flt << line;
                 float fovx;
                 flt >> fovx;
                 flt.clear();
@@ -51,22 +49,22 @@ Scene Sdfloader::loadscene(std::string file) const{
 
             }
 
-            else if (variable.compare("renderer") == 0){
+            else if (line.compare("renderer") == 0){
 
                 std::string camname;
-                datei >> camname; //fals der renderer doch angepasst wird
+                datei >> camname; //falls der renderer doch angepasst wird
 
                 std::string filename;
                 datei >> filename;
 
-                datei >> variable;
+                datei >> line;
                 unsigned xres;
                 unsigned yres;
-                flt << variable;
+                flt << line;
                 flt >> xres;
                 flt.clear();
-                datei >> variable;
-                flt << variable;
+                datei >> line;
+                flt << line;
                 flt >> yres;
                 flt.clear();
 
@@ -75,48 +73,48 @@ Scene Sdfloader::loadscene(std::string file) const{
 
             }
 
-            else if (variable.compare("define") == 0){
+            else if (line.compare("define") == 0){
 
-                datei >> variable;
+                datei >> line;
 
-                if (variable.compare("material") == 0){
+                if (line.compare("material") == 0){
 
                     datei >> name;
                     float r,g,b;
 
-                    datei >> variable;
-                    flt << variable << ' ';
-                    datei >> variable;
-                    flt << variable << ' ';
-                    datei >> variable;
-                    flt << variable;
+                    datei >> line;
+                    flt << line << ' ';
+                    datei >> line;
+                    flt << line << ' ';
+                    datei >> line;
+                    flt << line;
                     flt >> r >> g >> b;
                     Color ka(r,g,b);
                     flt.clear();
 
-                    datei >> variable;
-                    flt << variable << ' ';
-                    datei >> variable;
-                    flt << variable << ' ';
-                    datei >> variable;
-                    flt << variable;
+                    datei >> line;
+                    flt << line << ' ';
+                    datei >> line;
+                    flt << line << ' ';
+                    datei >> line;
+                    flt << line;
                     flt >> r >> g >> b;
                     Color kd(r,g,b);
                     flt.clear();
 
-                    datei >> variable;
-                    flt << variable << ' ';
-                    datei >> variable;
-                    flt << variable << ' ';
-                    datei >> variable;
-                    flt << variable;
+                    datei >> line;
+                    flt << line << ' ';
+                    datei >> line;
+                    flt << line << ' ';
+                    datei >> line;
+                    flt << line;
                     flt >> r >> g >> b;
                     Color ks(r,g,b);
                     flt.clear();
 
                     float m;
-                    datei >> variable;
-                    flt << variable;
+                    datei >> line;
+                    flt << line;
                     flt >> m;
                     flt.clear();
 
@@ -124,16 +122,16 @@ Scene Sdfloader::loadscene(std::string file) const{
                     scene.materials[name] = mat;
                 }
 
-                else if (variable.compare("amblight") == 0){
+                else if (line.compare("amblight") == 0){
 
                     float r,g,b;
 
-                    datei >> variable;
-                    flt << variable << ' ';
-                    datei >> variable;
-                    flt << variable << ' ';
-                    datei >> variable;
-                    flt << variable;
+                    datei >> line;
+                    flt << line << ' ';
+                    datei >> line;
+                    flt << line << ' ';
+                    datei >> line;
+                    flt << line;
                     flt >> r >> g >> b;
                     Color amb(r,g,b);
                     flt.clear();
@@ -142,44 +140,44 @@ Scene Sdfloader::loadscene(std::string file) const{
 
                 }
 
-                else if (variable.compare("background") == 0){
+                else if (line.compare("background") == 0){
 
                     float r,g,b;
 
-                    datei >> variable;
-                    flt << variable << ' ';
-                    datei >> variable;
-                    flt << variable << ' ';
-                    datei >> variable;
-                    flt << variable;
+                    datei >> line;
+                    flt << line << ' ';
+                    datei >> line;
+                    flt << line << ' ';
+                    datei >> line;
+                    flt << line;
                     flt >> r >> g >> b;
                     Color back(r,g,b);
                     flt.clear();
 
                     scene.background = back;
                 }
-                else if (variable.compare("light") == 0){
+                else if (line.compare("light") == 0){
 
                     datei >> name;
 
                     float x, y, z;
-                    datei >> variable;
-                    flt << variable << ' ';
-                    datei >> variable;
-                    flt << variable << ' ';
-                    datei >> variable;
-                    flt << variable;
+                    datei >> line;
+                    flt << line << ' ';
+                    datei >> line;
+                    flt << line << ' ';
+                    datei >> line;
+                    flt << line;
                     flt >> x >> y >> z;
                     glm::vec3 pos(x,y,z);
                     flt.clear();
 
                     float r, g, b;
-                    datei >> variable;
-                    flt << variable << ' ';
-                    datei >> variable;
-                    flt << variable << ' ';
-                    datei >> variable;
-                    flt << variable;
+                    datei >> line;
+                    flt << line << ' ';
+                    datei >> line;
+                    flt << line << ' ';
+                    datei >> line;
+                    flt << line;
                     flt >> r >> g >> b;
                     Color ld(r,g,b);
                     flt.clear();
@@ -189,64 +187,66 @@ Scene Sdfloader::loadscene(std::string file) const{
                     scene.lights.push_back(light);
 
                 }
-                else if (variable.compare("shape") == 0){
+                else if (line.compare("shape") == 0){
 
-                    datei >> variable;
+                    datei >> line;
 
-                    if (variable.compare("box") == 0){
+                    if (line.compare("box") == 0){
 
                         datei >> name;
                         float x, y, z;
-                        datei >> variable;
-                        flt << variable << ' ';
-                        datei >> variable;
-                        flt << variable << ' ';
-                        datei >> variable;
-                        flt << variable;
+                        datei >> line;
+                        flt << line << ' ';
+                        datei >> line;
+                        flt << line << ' ';
+                        datei >> line;
+                        flt << line;
                         flt >> x >> y >> z;
                         glm::vec3 p1(x,y,z);
                         flt.clear();
 
-                        datei >> variable;
-                        flt << variable << ' ';
-                        datei >> variable;
-                        flt << variable << ' ';
-                        datei >> variable;
-                        flt << variable;
+                        datei >> line;
+                        flt << line << ' ';
+                        datei >> line;
+                        flt << line << ' ';
+                        datei >> line;
+                        flt << line;
                         flt >> x >> y >> z;
                         glm::vec3 p2(x,y,z);
                         flt.clear();
 
-                        datei >> variable;
+                        datei >> line;
 
-                        std::shared_ptr<Shape> b(new Box(p1, p2,name, scene.materials[variable]));
-                        scene.shapes.push_back(b);
+						std::shared_ptr<Shape> s_ptr = std::make_shared<Box>(
+							Box{ p1, p2, name, scene.materials[line] }
+							);
+                        scene.shapes.push_back(s_ptr);
 
                     }
 
-                    if (variable.compare("sphere") == 0){
+                    if (line.compare("sphere") == 0){
 
                         datei >> name;
 
                         float x, y, z;
-                        datei >> variable;
-                        flt << variable << ' ';
-                        datei >> variable;
-                        flt << variable << ' ';
-                        datei >> variable;
-                        flt << variable;
+                        datei >> line;
+                        flt << line << ' ';
+                        datei >> line;
+                        flt << line << ' ';
+                        datei >> line;
+                        flt << line;
                         flt >> x >> y >> z;
                         glm::vec3 pos(x,y,z);
                         flt.clear();
 
-                        datei >> variable;
-                        flt << variable;
+                        datei >> line;
+                        flt << line;
                         float r;
                         flt >> r;
 
-                        datei >> variable;
+                        datei >> line;
 
-                        std::shared_ptr<Shape> sphere(new Sphere(pos, r,name, scene.materials[variable]));
+                        std::shared_ptr<Shape> sphere(new Sphere(pos, r,name, scene.materials[line]));
                         scene.shapes.push_back(sphere);
 
                     }
