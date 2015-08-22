@@ -12,6 +12,8 @@ struct Ray
     origin_{o},
     direction_{d} {}
 
+    ~Ray() {}
+
     glm::vec3 origin_;
     glm::vec3 direction_;
 };
