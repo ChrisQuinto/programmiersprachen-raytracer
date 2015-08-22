@@ -182,6 +182,9 @@ TEST_CASE("test camera", "[test camera]"){
     REQUIRE(cam1.pos() == pos0);
     REQUIRE(cam1.fovx() == fovx);
     std::cout << cam1;
+    glm::vec3 d(1.0,1.0,1.0);
+    std::cout << cam1.castray(d) << std::endl;
+
 }
 
 TEST_CASE("sdfloader_material", "[sdfloader]"){
