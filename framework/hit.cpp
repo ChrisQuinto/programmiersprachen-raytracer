@@ -30,6 +30,10 @@ Hit& Hit::operator=(Hit const& hit) {
     return *this;
 }
 
+bool Hit::operator==(Hit const& hit2) const{
+      return ((hit_ == hit2.hit_) && (distance_ == hit2.distance_) && (intersection_ == hit2.intersection_) && (normal_ == hit2.normal_) && (sptr_ == hit2.sptr_));
+    }
+
 std::ostream& operator<<(std::ostream& os, Hit const& hit) {
     os << "Hit: " << hit.hit_ << std::endl
        << "Distanz: " << hit.distance_ << std::endl

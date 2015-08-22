@@ -151,9 +151,9 @@ TEST_CASE("test intersectRayBox", "[test intersectRayBox]")
     Box box2{box_min2, box_max2, c, mat};
 
 	Hit temp;
-	//REQUIRE(box0.intersect(ray1) == temp);
-	//REQUIRE(box1.intersect(ray2) == temp);
-	//REQUIRE(box2.intersect(ray2) == temp);
+	REQUIRE(box0.intersect(ray1) == temp);
+	REQUIRE(box1.intersect(ray2) == temp);
+	REQUIRE(box2.intersect(ray2) == temp);
 }
 
 TEST_CASE("test light", "[test light]"){
@@ -183,7 +183,7 @@ TEST_CASE("test camera", "[test camera]"){
     REQUIRE(cam1.fovx() == fovx);
     std::cout << cam1;
     glm::vec3 d(1.0,1.0,1.0);
-    std::cout << cam1.castray(d) << std::endl;
+    //std::cout << cam1.castray(d) << std::endl;
 
 }
 
