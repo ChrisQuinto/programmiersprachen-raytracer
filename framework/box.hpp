@@ -24,7 +24,7 @@ public:
 
     /* virtual */ std::ostream& print(std::ostream& os) const override;
 
-    bool intersect(Ray const& ray, float& distance) const;
+    Hit intersect(Ray const& ray) override;
 
 private:
     glm::vec3 min_;

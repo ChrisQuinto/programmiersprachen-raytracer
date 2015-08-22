@@ -4,9 +4,11 @@
 #include <cmath>
 #include <string>
 #include <iostream>
-#include "material.hpp"
 #include "ray.hpp"
 #include "hit.hpp"
+#include "material.hpp"
+
+class Box;
 
 class Shape
 {
@@ -20,6 +22,8 @@ public:
     virtual float area() const = 0;
 
     virtual float volume() const = 0;
+
+    virtual Hit intersect(Ray const& ray) = 0;
 
     virtual std::ostream& print(std::ostream& os) const;
 

@@ -58,7 +58,7 @@ glm::vec3 const& Box::max() const {
     return os;
 }
 
-bool Box::intersect(Ray const& ray, float& distance) const {
+Hit Box::intersect(Ray const& ray) {
 
     //glm::vec3 d = glm::normalize(ray.direction_);
 
@@ -99,7 +99,7 @@ bool Box::intersect(Ray const& ray, float& distance) const {
 
     if (outp < std::max(0.0f, inp))
     {
-        return false;
+        return {};
     }
 
     //  distance = std::sqrt( ((ray.origin_.x * ray.origin_.x) + (ray.origin_.y * ray.origin_.y) + (ray.origin_.z * ray.origin_.z)) - () )
@@ -109,6 +109,6 @@ bool Box::intersect(Ray const& ray, float& distance) const {
         (ray.direction_.z * (outp - inp) * ray.direction_.z * (outp - inp))
         );*/
 
-    return true;
+    return {};
 
 }

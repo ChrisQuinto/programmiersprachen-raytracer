@@ -44,6 +44,23 @@ float Sphere::radius() const {
         return (4.0f/3.0f) * M_PI * (radius_ * radius_ * radius_);
     }
 
+/* virtual */ Hit Sphere::intersect(Ray const& ray) {
+    Hit s_hit;
+
+    s_hit.hit_ = glm::intersectRaySphere(
+        ray.origin_,
+        glm::normalize(ray.direction_),
+        center_, radius_,
+        s_hit.intersection_, s_hit.normal_
+    );
+
+    s_hit.distance_ = glm::distance(ray.origin_, s_hit.intersection_);
+
+    s_hit.sptr_ = std::make_shared<Sphere>(*this);
+
+    return s_hit;
+}
+
 /* virtual */ std::ostream& Sphere::print(std::ostream& os) const {
     os << "Sphere: \n";
     Shape::print(os); //Erweiterung
