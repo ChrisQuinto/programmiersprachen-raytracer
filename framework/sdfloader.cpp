@@ -22,13 +22,16 @@ Sdfloader::~Sdfloader() {}
 
 Scene Sdfloader::loadscene(std::string file) const{
 
-      std::ifstream datei(file, std::ios::in);
-      Scene scene{};
+    std::ifstream datei(file, std::ios::in);
 
-      std::string line, name;
-      std::stringstream flt;
+    std::string line, name;
+    std::stringstream flt;
 
-      if (datei.good()){
+    std::map<std::string, Material> matmap;
+    std::vector<std::shared_ptr <Shape>> shapevec;
+    std::vector<Light> lightvec;
+
+    if (datei.good()){
         std::cout << "File is good." << std::endl;
         while(datei >> line){
             if (line.compare("#") == 0 || line.compare("") == 0){
@@ -217,9 +220,9 @@ Scene Sdfloader::loadscene(std::string file) const{
 
                         datei >> line;
 
-						std::shared_ptr<Shape> s_ptr = std::make_shared<Box>(
-							Box{ p1, p2, name, scene.materials[line] }
-							);
+                        std::shared_ptr<Shape> s_ptr = std::make_shared<Box>(
+                            Box{ p1, p2, name, scene.materials[line] }
+                            );
                         scene.shapes.push_back(s_ptr);
 
                     }
@@ -265,6 +268,8 @@ Scene Sdfloader::loadscene(std::string file) const{
       else{
           std::cout << "No file found." << std::endl;
       }
+
+      Scene scene{};
       return scene;
 
     }
