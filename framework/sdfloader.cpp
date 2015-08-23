@@ -31,7 +31,9 @@ Scene Sdfloader::loadscene(std::string file) const{
     std::vector<std::shared_ptr <Shape>> shapevec;
     std::vector<Light> lightvec;
     Camera cam{"noname", 0.0, 0, 0}
-    Renderer renderer{"norenderer", }
+    Renderer renderer{*shapevec,"norenderer"}
+    Color amblight(0.0,0.0,0.0)
+    Color background(0.0,0.0,0.0)
 
     if (datei.good()){
         std::cout << "File is good." << std::endl;
@@ -86,8 +88,8 @@ Scene Sdfloader::loadscene(std::string file) const{
                 flt >> yres;
                 flt.clear();*/
 
-                renderer.
-                scene.renderer = r;
+                renderer.filename = filename;
+
 
             }
 
@@ -137,7 +139,7 @@ Scene Sdfloader::loadscene(std::string file) const{
                     flt.clear();
 
                     Material mat{name, ka, kd, ks, m};
-                    scene.materials[name] = mat;
+                    matmap[name] = mat;
                 }
 
                 else if (line.compare("amblight") == 0){
@@ -154,7 +156,7 @@ Scene Sdfloader::loadscene(std::string file) const{
                     Color amb(r,g,b);
                     flt.clear();
 
-                    scene.amblight = amb;
+                    amblight = amb;
 
                 }
 
@@ -172,7 +174,7 @@ Scene Sdfloader::loadscene(std::string file) const{
                     Color back(r,g,b);
                     flt.clear();
 
-                    scene.background = back;
+                    background = back;
                 }
                 else if (line.compare("light") == 0){
 
@@ -202,7 +204,7 @@ Scene Sdfloader::loadscene(std::string file) const{
 
 
                     Light light(name, pos, ld);
-                    scene.lights.push_back(light);
+                    lightvec.push_back(light);
 
                 }
                 else if (line.compare("shape") == 0){
@@ -236,9 +238,9 @@ Scene Sdfloader::loadscene(std::string file) const{
                         datei >> line;
 
                         std::shared_ptr<Shape> s_ptr = std::make_shared<Box>(
-                            Box{ p1, p2, name, scene.materials[line] }
+                            Box{ p1, p2, name, matmap[line] }
                             );
-                        scene.shapes.push_back(s_ptr);
+                        shapevec.push_back(s_ptr);
 
                     }
 
@@ -264,8 +266,8 @@ Scene Sdfloader::loadscene(std::string file) const{
 
                         datei >> line;
 
-                        std::shared_ptr<Shape> sphere(new Sphere(pos, r,name, scene.materials[line]));
-                        scene.shapes.push_back(sphere);
+                        std::shared_ptr<Shape> sphere(new Sphere(pos, r,name, matmap[line]));
+                        shapevec.push_back(sphere);
 
                     }
 
