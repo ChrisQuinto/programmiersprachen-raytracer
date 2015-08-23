@@ -30,6 +30,8 @@ Scene Sdfloader::loadscene(std::string file) const{
     std::map<std::string, Material> matmap;
     std::vector<std::shared_ptr <Shape>> shapevec;
     std::vector<Light> lightvec;
+    Camera cam{"noname", 0.0, 0, 0}
+    Renderer renderer{"norenderer", }
 
     if (datei.good()){
         std::cout << "File is good." << std::endl;
@@ -47,19 +49,6 @@ Scene Sdfloader::loadscene(std::string file) const{
                 flt >> fovx;
                 flt.clear();
 
-                Camera c{name, fovx};
-                scene.camera = c;
-
-            }
-
-            else if (line.compare("renderer") == 0){
-
-                std::string camname;
-                datei >> camname; //falls der renderer doch angepasst wird
-
-                std::string filename;
-                datei >> filename;
-
                 datei >> line;
                 unsigned xres;
                 unsigned yres;
@@ -71,7 +60,33 @@ Scene Sdfloader::loadscene(std::string file) const{
                 flt >> yres;
                 flt.clear();
 
-                Renderer r{xres, yres, filename};
+                cam.name_ = name;
+                cam.fovx_ = fovx;
+                cam.xres_ = xres;
+                cam.yres_ = yres;
+
+            }
+
+            else if (line.compare("renderer") == 0){
+
+                std::string camname;
+                datei >> camname; //falls der renderer doch angepasst wird
+
+                std::string filename;
+                datei >> filename;
+
+                /*datei >> line;
+                unsigned xres;
+                unsigned yres;
+                flt << line;
+                flt >> xres;
+                flt.clear();
+                datei >> line;
+                flt << line;
+                flt >> yres;
+                flt.clear();*/
+
+                renderer.
                 scene.renderer = r;
 
             }
