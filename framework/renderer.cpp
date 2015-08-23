@@ -9,33 +9,23 @@
 
 #include "renderer.hpp"
 
-Renderer::Renderer(unsigned w, unsigned h, std::string const& file)
-  : width_(w)
-  , height_(h)
-  , colorbuffer_(w*h, Color(0.0, 0.0, 0.0))
-  , filename_(file)
-  , ppm_(width_, height_)
-{}
-
-Renderer::Renderer()
-  : width_(0)
-  , height_(0)
-  , colorbuffer_(width_ * height_, Color(0.0, 0.0, 0.0))
-  , filename_("")
-  , ppm_(width_, height_)
-{}
+Renderer::Renderer(std::shared_ptr<Scene> scene, std::string const& file) :
+    scene_{scene},
+    colorbuffer_(scene->camera.xres()*scene->camera.yres(), Color(0.0, 0.0, 0.0)), //scene-> äquivalent zu (*scene).
+    filename_(file),
+    ppm_(scene->camera.xres(), scene->camera.yres()) {}
 
 void Renderer::render()
 {
   const std::size_t checkersize = 20;
 
-  for (unsigned y = 0; y < height_; ++y) {
-    for (unsigned x = 0; x < width_; ++x) {
+  for (unsigned y = 0; y < scene_->camera.yres(); ++y) {
+      for (unsigned x = 0; x < scene_->camera.xres(); ++x) {
       Pixel p(x,y);
       if ( ((x/checkersize)%2) != ((y/checkersize)%2)) {
-        p.color = Color(0.0, 1.0, float(x)/height_);
+          p.color = Color(0.0, 1.0, float(x) / scene_->camera.yres());
       } else {
-        p.color = Color(1.0, 0.0, float(y)/width_);
+          p.color = Color(1.0, 0.0, float(y) / scene_->camera.xres());
       }
 
       write(p);
@@ -47,7 +37,7 @@ void Renderer::render()
 void Renderer::write(Pixel const& p)
 {
   // flip pixels, because of opengl glDrawPixels
-  size_t buf_pos = (width_*p.y + p.x);
+    size_t buf_pos = (scene_->camera.xres()*p.y + p.x);
   if (buf_pos >= colorbuffer_.size() || (int)buf_pos < 0) {
     std::cerr << "Fatal Error Renderer::write(Pixel p) : "
       << "pixel out of ppm_ : "

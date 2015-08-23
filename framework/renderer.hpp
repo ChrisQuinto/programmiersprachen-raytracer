@@ -10,32 +10,33 @@
 #ifndef BUW_RENDERER_HPP
 #define BUW_RENDERER_HPP
 
+#include <glm/glm.hpp>
+#include <string>
+#include <memory>
 #include "color.hpp"
 #include "pixel.hpp"
 #include "ppmwriter.hpp"
-#include <string>
-#include <glm/glm.hpp>
+#include "scene.hpp"
 
 class Renderer
 {
 public:
-  Renderer( unsigned w, unsigned h, std::string const& file);
-  Renderer();
+    Renderer();
+    Renderer(std::shared_ptr<Scene> scene, std::string const& file);
 
-  void render();
-  void write(Pixel const& p);
+    void render();
+    void write(Pixel const& p);
 
-  inline std::vector<Color> const& colorbuffer() const
-  {
-    return colorbuffer_;
-  }
+    inline std::vector<Color> const& colorbuffer() const
+    {
+      return colorbuffer_;
+    }
 
 private:
-  unsigned width_;
-  unsigned height_;
-  std::vector<Color> colorbuffer_;
-  std::string filename_;
-  PpmWriter ppm_;
+    std::shared_ptr<Scene> scene_;
+    std::vector<Color> colorbuffer_;
+    std::string filename_;
+    PpmWriter ppm_;
 };
 
-#endif // #ifndef BUW_RENDERER_HPP
+#endif
