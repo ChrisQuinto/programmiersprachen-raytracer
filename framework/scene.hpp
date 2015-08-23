@@ -3,29 +3,62 @@
 #include <map>
 #include <vector>
 #include <memory>
+#include <algorithm>
 #include <string>
 #include <iostream>
 #include "shape.hpp"
 #include "material.hpp"
 #include "camera.hpp"
-#include "renderer.hpp"
 #include "light.hpp"
 
 struct Scene
 {
     Scene() :
-    camera{Camera{}},
-    amblight{Color{}},
-    background{Color{}} {
+    camera{},
+    amblight{},
+    background{},
+    materials{},
+    lights{},
+    shapes_ptr{} {
         std::cout << "Scene built." << std::endl;
+    }
+
+    Scene(
+        Camera cam,
+        Color const& al,
+        Color const& bg,
+        std::map<std::string, std::shared_ptr<Material>> materials_map,
+        std::vector<std::shared_ptr<Light>> lights_vec,
+        std::shared_ptr<Shape> shapes
+    ) :
+    camera{cam},
+    amblight{al},
+    background{bg},
+    materials{},
+    lights{},
+    shapes_ptr{shapes} {
+        materials.swap(materials_map);
+        lights.swap(lights_vec);
     }
 
     ~Scene() {}
 
-    std::map<std::string, Material> materials;
-    std::vector<std::shared_ptr <Shape>> shapes;
-    std::vector<Light> lights;
+    Scene& operator=(Scene const& s2) {
+        if (this == s2) {
+            return *this;
+        }
+        camera = s2.camera;
+        amblight = s2.amblight;
+        background = s2.background;
+        materials.swap(s2.materials);
+        lights.swap(s2.lights);
+        shapes = s2.shapes_ptr;
+    }
+
     Camera camera;
+    std::map<std::string, Material> materials;
+    std::vector<std::shared_ptr <Shape>> shapes_ptr;
+    std::vector<Light> lights;
     Color amblight;
     Color background;
 };
