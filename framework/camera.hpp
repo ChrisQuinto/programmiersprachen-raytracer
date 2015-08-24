@@ -6,9 +6,8 @@
 #include "ray.hpp"
 
 
-class Camera
+struct Camera
 {
-public:
     Camera();
     Camera(std::string const& n, unsigned x, unsigned y, float const& fovx);
     ~Camera();
@@ -22,7 +21,6 @@ public:
 
     friend std::ostream& operator<<(std::ostream& os, Camera const& c);
 
-private:
     std::string name_;
     glm::vec3 pos_;
     unsigned xres_;
