@@ -44,8 +44,8 @@ struct Scene
 
     ~Scene() {}
 
-    Scene& operator=(Scene const& s2) {
-        if (this == s2) {
+    Scene& operator=(Scene s2) {
+        if (this == &s2) {
             return *this;
         }
         camera = s2.camera;
@@ -53,13 +53,13 @@ struct Scene
         background = s2.background;
         materials.swap(s2.materials);
         lights.swap(s2.lights);
-        shapes = s2.shapes_ptr;
+        shapes_ptr = s2.shapes_ptr;
     }
 
     Camera camera;
-    std::map<std::string, Material> materials;
-    std::vector<std::shared_ptr <Shape>> shapes_ptr;
-    std::vector<Light> lights;
+    std::map<std::string, std::shared_ptr<Material>> materials;
+    std::vector<std::shared_ptr<Shape>> shapes_ptr;
+    std::vector<std::shared_ptr<Light>> lights;
     Color amblight;
     Color background;
 };

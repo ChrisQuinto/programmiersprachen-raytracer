@@ -198,13 +198,15 @@ TEST_CASE("sdfloader Test", "[sdfloader test]"){
     std::cout << "\n" ;
     std::cout << "Ambientes Licht: \n" << s.amblight << std::endl;
     std::cout << "Background-Color: \n" << s.background << std::endl;
-    std::cout << s.materials["red"] << std::endl;
-    std::cout << s.materials["blue"] << std::endl;
-    std::cout << *s.shapes[0];
-    std::cout << *s.shapes[1];
+    std::cout << *s.materials["red"] << std::endl;
+    std::cout << *s.materials["blue"] << std::endl;
+    std::cout << *s.shapes_ptr[0];
+    std::cout << *s.shapes_ptr[1];
     std::cout << s.camera;
-    std::cout << s.lights[0];
+    std::cout << *s.lights[0];
 }
+
+
 
 // AUFGABENBLATT 6
 /*TEST_CASE("statischer Typ/dynamischer Typ Variable", "[6.7]")

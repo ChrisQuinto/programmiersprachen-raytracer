@@ -42,7 +42,7 @@ std::ostream& operator<<(std::ostream& os, Camera const& c)
     os << "Camera: \n"
        << "Name: " << c.name() << "\n"
        << "Pos: (" << c.pos().x << "," << c.pos().y << "," << c.pos().z << ")\n"
-       << "Auflösung: " << c.xres() << "x" << c.yres() << "\n"
+       << "Aufloesung: " << c.xres() << "x" << c.yres() << "\n"
        << "Winkel: "<< c.fovx() << "\n\n";
     return os;
   }
