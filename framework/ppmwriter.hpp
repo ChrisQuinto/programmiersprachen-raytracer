@@ -35,4 +35,4 @@ private:
   size_t height_;
 };
 
-#endif // BUW_PPMWRITER
+#endif
