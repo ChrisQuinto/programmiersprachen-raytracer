@@ -1,6 +1,7 @@
 #ifndef BUW_BOX_HPP
 #define BUW_BOX_HPP
 #include <algorithm>
+#include <glm/glm.hpp>
 #include "shape.hpp"
 
 class Box : public Shape
