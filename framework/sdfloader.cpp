@@ -35,7 +35,6 @@ Scene Sdfloader::loadscene(std::string file) const{
     std::shared_ptr<Scene> scene_ptr;
     std::vector<std::shared_ptr<Light>> lightvec;
     std::vector<std::shared_ptr<Shape>> shapevec;
-    Renderer renderer{scene_ptr,"norenderer"};
 
     if (datei.good()){
         std::cout << "File is good." << std::endl;
