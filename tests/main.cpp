@@ -189,19 +189,24 @@ TEST_CASE("test camera", "[test camera]"){
 
 TEST_CASE("sdfloader_material", "[sdfloader]"){
     Sdfloader loader{"./materials.txt"};
+    std::cout << "WASSUP \n";
     Scene s = loader.loadscene("./materials.txt");
+    std::cout << "WASSUP NOW \n";
 }
 
 TEST_CASE("sdfloader Test", "[sdfloader test]"){
+    std::cout << "u here? \n";
     Sdfloader loader{"./test.txt"};
+    std::cout << "u there? \n";
     Scene s = loader.loadscene("./test.txt");
+    std::cout << "u here again? \n";
     std::cout << "\n" ;
     std::cout << "Ambientes Licht: \n" << s.amblight << std::endl;
     std::cout << "Background-Color: \n" << s.background << std::endl;
     std::cout << s.materials["red"] << std::endl;
     std::cout << s.materials["blue"] << std::endl;
-    std::cout << *s.shapes[0];
-    std::cout << *s.shapes[1];
+    std::cout << *s.shapes_ptr[0];
+    std::cout << *s.shapes_ptr[1];
     std::cout << s.camera;
     std::cout << s.lights[0];
 }
