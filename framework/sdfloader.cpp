@@ -28,6 +28,7 @@ Scene Sdfloader::loadscene(std::string file) const{
     std::string line, name;
     std::stringstream flt;
 
+    std::string filename;
     Camera cam;
     Color amblight;
     Color background;
@@ -41,6 +42,13 @@ Scene Sdfloader::loadscene(std::string file) const{
         while(datei >> line){
             if (line.compare("#") == 0 || line.compare("") == 0){
               continue;
+            }
+
+            else if (line.compare("renderer") == 0){
+
+                datei >> filename;
+
+                std::cout << "renderer worked \n";
             }
 
             else if (line.compare("camera") == 0){
@@ -68,30 +76,7 @@ Scene Sdfloader::loadscene(std::string file) const{
                 cam.xres_ = xres;
                 cam.yres_ = yres;
 
-            }
-
-            else if (line.compare("renderer") == 0){
-
-                std::string camname;
-                datei >> camname; //falls der renderer doch angepasst wird
-
-                std::string filename;
-                datei >> filename;
-
-                /*datei >> line;
-                unsigned xres;
-                unsigned yres;
-                flt << line;
-                flt >> xres;
-                flt.clear();
-                datei >> line;
-                flt << line;
-                flt >> yres;
-                flt.clear();*/
-
-                //renderer.filename = filename;
-
-
+                std::cout << "camera worked \n";
             }
 
             else if (line.compare("define") == 0){
@@ -144,6 +129,7 @@ Scene Sdfloader::loadscene(std::string file) const{
 
                     /*Material mat{name, ka, kd, ks, m};
                     matmap[name] = mat;*/
+                    std::cout << "material worked \n";
                 }
 
                 else if (line.compare("amblight") == 0){
@@ -162,6 +148,7 @@ Scene Sdfloader::loadscene(std::string file) const{
 
                     amblight = amb;
 
+                    std::cout << "amblight worked \n";
                 }
 
                 else if (line.compare("background") == 0){
@@ -179,6 +166,8 @@ Scene Sdfloader::loadscene(std::string file) const{
                     flt.clear();
 
                     background = back;
+
+                    std::cout << "background worked \n";
                 }
 
                 else if (line.compare("light") == 0){
@@ -213,6 +202,7 @@ Scene Sdfloader::loadscene(std::string file) const{
                         );
                     lightvec.push_back(light);
 
+                    std::cout << "light worked \n";
                 }
 
                 else if (line.compare("shape") == 0){
@@ -250,6 +240,7 @@ Scene Sdfloader::loadscene(std::string file) const{
                             );
                         shapevec.push_back(s_ptr);
 
+                        std::cout << "box worked \n";
                     }
 
                     if (line.compare("sphere") == 0){
@@ -274,11 +265,14 @@ Scene Sdfloader::loadscene(std::string file) const{
 
                         datei >> line;
 
+                        std::cout << "sphere eingelesen \n";
+
                         std::shared_ptr<Shape> sphere = std::make_shared<Sphere>(
                             Sphere{pos, r,name, *matmap[line]}
                             );
                         shapevec.push_back(sphere);
 
+                        std::cout << "sphere worked \n";
                     }
 
                 }
@@ -296,7 +290,9 @@ Scene Sdfloader::loadscene(std::string file) const{
           std::cout << "No file found." << std::endl;
       }
 
+    std::cout << "all worked \n";
     Scene scene{
+        filename,
         cam,
         amblight,
         background,
