@@ -14,6 +14,7 @@
 struct Scene
 {
     Scene() :
+    filename{"defaultscene.ppm"},
     camera{},
     amblight{},
     background{},
@@ -24,14 +25,15 @@ struct Scene
     }
 
     Scene(
+        std::string const& fname,
         Camera cam,
         Color const& al,
         Color const& bg,
         std::map<std::string, std::shared_ptr<Material>> materials_map,
         std::vector<std::shared_ptr<Light>> lights_vec,
         std::vector<std::shared_ptr<Shape>> shapes
-
     ) :
+    filename{fname},
     camera{cam},
     amblight{al},
     background{bg},
@@ -48,6 +50,7 @@ struct Scene
         if (this == &s2) {
             return *this;
         }
+        filename = s2.filename;
         camera = s2.camera;
         amblight = s2.amblight;
         background = s2.background;
@@ -56,6 +59,7 @@ struct Scene
         shapes_ptr = s2.shapes_ptr;
     }
 
+    std::string filename;
     Camera camera;
     std::map<std::string, std::shared_ptr<Material>> materials;
     std::vector<std::shared_ptr<Shape>> shapes_ptr;

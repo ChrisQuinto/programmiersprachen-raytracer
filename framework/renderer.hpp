@@ -21,7 +21,7 @@
 class Renderer
 {
 public:
-    Renderer(std::shared_ptr<Scene> scene, std::string const& filename);
+    Renderer(std::shared_ptr<Scene> scene);
 
     void render();
     void write(Pixel const& p);
@@ -34,7 +34,6 @@ public:
 private:
     std::shared_ptr<Scene> scene_;
     std::vector<Color> colorbuffer_;
-    std::string filename_;
     PpmWriter ppm_;
 };
 
