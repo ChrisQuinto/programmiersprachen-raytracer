@@ -15,7 +15,7 @@ Renderer::Renderer(std::shared_ptr<Scene> scene, std::string const& filename) :
     filename_(filename),
     ppm_(scene->camera.xres(), scene->camera.yres(), filename) {}
 
-void Renderer::render()
+/*void Renderer::render()
 {
   const std::size_t checkersize = 20;
 
@@ -27,6 +27,23 @@ void Renderer::render()
       } else {
           p.color = Color(1.0, 0.0, float(y) / scene_->camera.xres());
       }
+
+      write(p);
+    }
+  }
+  ppm_.save(filename_);
+}*/
+
+void Renderer::render()
+{
+  unsigned z = (scene_->camera.xres()/2)/(tan(scene_->camera.fovx()/360*M_PI));
+  for (unsigned y = 0; y < scene_->camera.yres(); ++y) {
+      for (unsigned x = 0; x < scene_->camera.xres(); ++x) {
+      glm::vec3 direction (-scene_->camera.xres()/2-0.5+x, -scene_->camera.yres()/2-0.5+y, z)
+      scene_->camera.castray(direction);
+
+      Pixel p(x,y);
+
 
       write(p);
     }
