@@ -29,7 +29,8 @@ struct Scene
         Color const& bg,
         std::map<std::string, std::shared_ptr<Material>> materials_map,
         std::vector<std::shared_ptr<Light>> lights_vec,
-        std::shared_ptr<Shape> shapes
+        std::vector<std::shared_ptr<Shape>> shapes
+
     ) :
     camera{cam},
     amblight{al},
