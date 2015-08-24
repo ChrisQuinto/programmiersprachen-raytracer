@@ -21,8 +21,7 @@
 class Renderer
 {
 public:
-    Renderer();
-    Renderer(std::shared_ptr<Scene> scene, std::string const& file);
+    Renderer(std::shared_ptr<Scene> scene, std::string const& filename);
 
     void render();
     void write(Pixel const& p);

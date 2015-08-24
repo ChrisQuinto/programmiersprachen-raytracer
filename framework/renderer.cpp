@@ -9,11 +9,11 @@
 
 #include "renderer.hpp"
 
-Renderer::Renderer(std::shared_ptr<Scene> scene, std::string const& file) :
+Renderer::Renderer(std::shared_ptr<Scene> scene, std::string const& filename) :
     scene_{scene},
     colorbuffer_(scene->camera.xres()*scene->camera.yres(), Color(0.0, 0.0, 0.0)), //scene-> äquivalent zu (*scene).
-    filename_(file),
-    ppm_(scene->camera.xres(), scene->camera.yres()) {}
+    filename_(filename),
+    ppm_(scene->camera.xres(), scene->camera.yres(), filename) {}
 
 void Renderer::render()
 {
