@@ -8,7 +8,7 @@
 #include "light.hpp"
 #include "camera.hpp"
 #include "sdfloader.hpp"
-
+#include "renderer.hpp"
 
 TEST_CASE("test material", "[test material]")
 {
@@ -205,6 +205,12 @@ TEST_CASE("sdfloader Test", "[sdfloader test]"){
     std::cout << *s.lights[0];
 }
 
+TEST_CASE("renderer Test", "[renderer test]"){
+    Sdfloader loader{"./test.txt"};
+    Scene s = loader.loadscene("./test.txt");
+    std::shared_ptr<Scene> scene;
+    //Renderer renderer(scene);
+}
 
 
 // AUFGABENBLATT 6
