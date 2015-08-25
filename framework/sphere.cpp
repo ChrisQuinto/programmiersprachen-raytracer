@@ -71,6 +71,6 @@ float Sphere::radius() const {
     return os;
 }
 
-bool Sphere::intersect(Ray const& ray, float& distance) const {
+/*bool Sphere::intersect(Ray const& ray, float& distance) const {
     return glm::intersectRaySphere(ray.origin_, glm::normalize(ray.direction_), center_, radius_ * radius_, distance);
-}
+}*/
