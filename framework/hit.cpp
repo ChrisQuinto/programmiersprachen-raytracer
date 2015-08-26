@@ -36,15 +36,18 @@ bool Hit::operator==(Hit const& hit2) const{
     }
 
 std::ostream& operator<<(std::ostream& os, Hit const& hit) {
-    os << "Hit: " << hit.hit_ << std::endl
-       << "Distanz: " << hit.distance_ << std::endl
-       << "Intersection: ("
-       << hit.intersection_.x << ", "
-       << hit.intersection_.y << ", "
-       << hit.intersection_.z << ")" << std::endl
-       << "Normal: ("
-       << hit.normal_.x << ", "
-       << hit.normal_.y << ", "
-       << hit.normal_.z << ")" << std::endl;
+    os << "Hit: " << hit.hit_ << std::endl;
+    if (hit.hit_ == true) {
+           os << "Distanz: " << hit.distance_ << std::endl
+           << "Intersection: ("
+           << hit.intersection_.x << ", "
+           << hit.intersection_.y << ", "
+           << hit.intersection_.z << ")" << std::endl
+           << "Normal: ("
+           << hit.normal_.x << ", "
+           << hit.normal_.y << ", "
+           << hit.normal_.z << ")" << std::endl;
+        return os;
+    }
     return os;
 }

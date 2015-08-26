@@ -19,7 +19,7 @@ struct Ray
     ~Ray() {}
 
     friend std::ostream& operator<<(std::ostream& os, Ray const& ray) {
-        os << "Origin: ("
+        os << "Ray: " << std::endl << "Origin: ("
             << ray.origin_.x << ","
             << ray.origin_.y << ","
             << ray.origin_.z << ") \n"
