@@ -16,6 +16,18 @@ struct Ray
 
     ~Ray() {}
 
+    friend std::ostream& operator<<(std::ostream& os, Ray const& ray) {
+        os << "Origin: ("
+            << ray.origin_.x << ","
+            << ray.origin_.y << ","
+            << ray.origin_.z << ") \n"
+            << "Direction: ("
+            << ray.direction_.x << ","
+            << ray.direction_.y << ","
+            << ray.direction_.z << ") \n";
+        return os;
+    }
+
     glm::vec3 origin_;
     glm::vec3 direction_;
     glm::vec3 inv_direction_;
