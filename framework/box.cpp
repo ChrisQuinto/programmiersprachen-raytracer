@@ -97,9 +97,9 @@ Hit Box::intersect(Ray const& ray) {
 
     Hit hit;
 
-    glm::vec3 normal;
+    glm::vec3 normal{INFINITY,INFINITY,INFINITY};
 
-    //getting the right normal for an intersection
+    //getting the normal vec on the side of the intersection
     if (abs(hit.intersection_.x - max_.x) < 0.000001) {
         normal = glm::vec3{1.0, 0.0, 0.0};
     } else if (abs(hit.intersection_.x - min_.x) < 0.000001) {
@@ -114,7 +114,7 @@ Hit Box::intersect(Ray const& ray) {
         normal = glm::vec3{0.0, 0.0, 1.0};
     }
 
-    if (tmax > std::max(0.0, tmin)) {
+    if (tmax > std::max(0.0f, tmin)) {
         hit.distance_ = sqrt(tmin * tmin *
                              (ray.direction_.x * ray.direction_.x +
                               ray.direction_.y * ray.direction_.y +
