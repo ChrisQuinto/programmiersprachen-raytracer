@@ -55,13 +55,13 @@ std::shared_ptr<Scene> Sdfloader::loadscene(std::string file) const{
                 datei >> name;
                 datei >> line;
                 flt << line;
-                float fovx;
+                double fovx;
                 flt >> fovx;
                 flt.clear();
 
                 datei >> line;
-                unsigned xres;
-                unsigned yres;
+                int xres;
+                int yres;
                 flt << line;
                 flt >> xres;
                 flt.clear();

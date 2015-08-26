@@ -7,7 +7,7 @@ Camera::Camera() :
     yres_{500},
     fovx_{60.0f} {}
 
-Camera::Camera(std::string const& n,unsigned x,unsigned y, float const& fovx) :
+Camera::Camera(std::string const& n,int x,int y, double const& fovx) :
     name_{n},
     pos_{0.0,0.0,0.0},
     xres_{x},
@@ -22,13 +22,13 @@ std::string const& Camera::name() const {
 glm::vec3 const& Camera::pos() const {
     return pos_;
 }
-unsigned const& Camera::xres() const {
+int const& Camera::xres() const {
     return xres_;
 }
-unsigned const& Camera::yres() const {
+int const& Camera::yres() const {
     return yres_;
 }
-float const& Camera::fovx() const {
+double const& Camera::fovx() const {
     return fovx_;
 }
 
