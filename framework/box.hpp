@@ -23,9 +23,9 @@ public:
 
     /* virtual */ float volume() const override;
 
-    /* virtual */ std::ostream& print(std::ostream& os) const override;
+    /* virtual */ Hit intersect(Ray const& ray) override;
 
-    Hit intersect(Ray const& ray) override;
+    /* virtual */ std::ostream& print(std::ostream& os) const override;
 
 private:
     glm::vec3 min_;

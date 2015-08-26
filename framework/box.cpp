@@ -1,3 +1,4 @@
+#include <limits>
 #include "box.hpp"
 
 Box::Box() :
@@ -97,7 +98,7 @@ Hit Box::intersect(Ray const& ray) {
 
     Hit hit;
 
-    glm::vec3 normal{INFINITY,INFINITY,INFINITY};
+    glm::vec3 normal{std::numeric_limits<float>::infinity(),std::numeric_limits<float>::infinity(),std::numeric_limits<float>::infinity()};
 
     //getting the normal vec on the side of the intersection
     if (abs(hit.intersection_.x - max_.x) < 0.000001) {
