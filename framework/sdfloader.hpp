@@ -14,7 +14,7 @@ public:
       Sdfloader(std::string file);
       ~Sdfloader();
 
-      Scene loadscene(std::string file) const;
+      std::shared_ptr<Scene> loadscene(std::string file) const;
       std::string get_file() const;
 
 private:

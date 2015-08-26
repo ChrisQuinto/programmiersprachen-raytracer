@@ -18,6 +18,7 @@
 #include "ppmwriter.hpp"
 #include "scene.hpp"
 #include "shape.hpp"
+#include "hit.hpp"
 
 class Renderer
 {

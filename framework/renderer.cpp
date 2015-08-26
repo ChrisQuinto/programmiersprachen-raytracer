@@ -44,7 +44,14 @@ void Renderer::render()
       Ray ray = scene_->camera.castray(direction);
 
       for (std::vector<std::shared_ptr<Shape>>::iterator i =scene_->shapes_ptr.begin();i != scene_->shapes_ptr.end();++i){
-        *scene_->shapes_ptr[0].intersect(ray);
+        Hit hit = (*i)->intersect(ray);
+
+        std::map<std::shared_ptr<Shape>, float> shp;
+
+          if(hit.hit_ == true){
+
+          }
+
       }
 
       Pixel p(x,y);

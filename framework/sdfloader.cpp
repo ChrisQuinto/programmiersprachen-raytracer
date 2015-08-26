@@ -21,7 +21,7 @@ Sdfloader::Sdfloader(std::string file) :
 
 Sdfloader::~Sdfloader() {}
 
-Scene Sdfloader::loadscene(std::string file) const{
+std::shared_ptr<Scene> Sdfloader::loadscene(std::string file) const{
 
     std::ifstream datei(file, std::ios::in);
 
@@ -291,15 +291,18 @@ Scene Sdfloader::loadscene(std::string file) const{
       }
 
     std::cout << "all worked \n";
-    Scene scene{
-        filename,
-        cam,
-        amblight,
-        background,
-        matmap,
-        lightvec,
-        shapevec
-    };
-    return scene;
+
+    std::shared_ptr<Scene> sceneptr = std::make_shared<Scene>(
+        Scene {
+            filename,
+            cam,
+            amblight,
+            background,
+            matmap,
+            lightvec,
+            shapevec
+        }
+    );
+    return sceneptr;
 
 }
