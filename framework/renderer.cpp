@@ -13,7 +13,7 @@
 
 Renderer::Renderer(std::shared_ptr<Scene> scene) :
     scene_{scene},
-    colorbuffer_(scene->camera.xres()*scene->camera.yres(), Color{}), //scene-> äquivalent zu (*scene).
+    colorbuffer_(scene->camera.xres()*scene->camera.yres(), Color{}), //scene-> Ã¤quivalent zu (*scene).
     ppm_(scene->camera.xres(), scene->camera.yres(), scene->filename) {}
 
 /*void Renderer::render()
@@ -42,22 +42,24 @@ void Renderer::render()
       for (unsigned x = 0; x < scene_->camera.xres(); ++x) {
       glm::vec3 direction (-scene_->camera.xres()/2-0.5+x, -scene_->camera.yres()/2-0.5+y, z);
       Ray ray = scene_->camera.castray(direction);
-
+      std::shared_ptr<Shape> first_hit;
       for (std::vector<std::shared_ptr<Shape>>::iterator i =scene_->shapes_ptr.begin();i != scene_->shapes_ptr.end();++i){
         Hit hit = (*i)->intersect(ray);
 
         std::map<std::shared_ptr<Shape>, float> shp;
         float shortest = 999999.9;
+        //std::shared_ptr<Shape> first_hit;
           if(hit.hit_ == true){
             if(hit.distance_ < shortest){
               shortest = hit.distance_;
+              first_hit = hit.sptr_;
             }
           }
 
       }
 
       Pixel p(x,y);
-
+      p.color = ((*first_hit).material()).kd();
 
       write(p);
     }
