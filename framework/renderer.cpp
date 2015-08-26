@@ -38,6 +38,7 @@ Renderer::Renderer(std::shared_ptr<Scene> scene) :
 void Renderer::render()
 {
   int z = (scene_->camera.xres()/2)/(tan(scene_->camera.fovx()/360 * M_PI));
+  std::cout << -z << std::endl;
   for (int y = 0; y < scene_->camera.yres(); ++y) {
       for (int x = 0; x < scene_->camera.xres(); ++x) {
         Pixel p(x,y);
