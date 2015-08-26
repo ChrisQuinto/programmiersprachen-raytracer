@@ -1,11 +1,12 @@
+#include <limits>
 #include "hit.hpp"
 #include "shape.hpp"
 
 Hit::Hit() :
 hit_{false},
-distance_{INFINITY},
-intersection_{glm::vec3{ INFINITY,INFINITY,INFINITY }},
-normal_{glm::vec3{ INFINITY,INFINITY,INFINITY }},
+distance_{std::numeric_limits<float>::infinity()},
+intersection_{std::numeric_limits<float>::infinity(),std::numeric_limits<float>::infinity(),std::numeric_limits<float>::infinity()},
+normal_{std::numeric_limits<float>::infinity(),std::numeric_limits<float>::infinity(),std::numeric_limits<float>::infinity()},
 sptr_{nullptr} {}
 
 Hit::Hit(bool hit, float dis, glm::vec3 const& intersection,
