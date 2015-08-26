@@ -41,7 +41,7 @@ void Renderer::render()
   for (unsigned y = 0; y < scene_->camera.yres(); ++y) {
       for (unsigned x = 0; x < scene_->camera.xres(); ++x) {
         Pixel p(x,y);
-        glm::vec3 direction (-scene_->camera.xres()/2-0.5+x, -scene_->camera.yres()/2-0.5+y, z);
+        glm::vec3 direction (-scene_->camera.xres()/2-0.5+x, -scene_->camera.yres()/2-0.5+y, -z);
         Ray ray = scene_->camera.castray(direction);
         std::shared_ptr<Shape> first_hit;
         double shortest = 999999.9;
