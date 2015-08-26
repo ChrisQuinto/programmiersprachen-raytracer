@@ -98,23 +98,6 @@ Hit Box::intersect(Ray const& ray) {
 
     Hit hit;
 
-    glm::vec3 normal{std::numeric_limits<float>::infinity(),std::numeric_limits<float>::infinity(),std::numeric_limits<float>::infinity()};
-
-    //getting the normal vec on the side of the intersection
-    if (abs(hit.intersection_.x - max_.x) < 0.000001) {
-        normal = glm::vec3{1.0, 0.0, 0.0};
-    } else if (abs(hit.intersection_.x - min_.x) < 0.000001) {
-        normal = glm::vec3{-1.0, 0.0, 0.0};
-    } else if (abs(hit.intersection_.y - max_.y) < 0.000001) {
-        normal = glm::vec3{0.0, 1.0, 0.0};
-    } else if (abs(hit.intersection_.y - min_.y) < 0.000001) {
-        normal = glm::vec3{0.0, -1.0, 0.0};
-    } else if (abs(hit.intersection_.z - max_.z) < 0.000001) {
-        normal = glm::vec3{0.0, 0.0, -1.0};
-    } else if (abs(hit.intersection_.z - min_.z) < 0.000001) {
-        normal = glm::vec3{0.0, 0.0, 1.0};
-    }
-
     if (tmax > std::max(0.0f, tmin)) {
         hit.distance_ = sqrt(tmin * tmin *
                              (ray.direction_.x * ray.direction_.x +
@@ -127,36 +110,39 @@ Hit Box::intersect(Ray const& ray) {
             tmin * ray.direction_.y,
             tmin * ray.direction_.z
         };
+
+        glm::vec3 normal{std::numeric_limits<float>::infinity(),std::numeric_limits<float>::infinity(),std::numeric_limits<float>::infinity()};
+
+        //getting the normal vec on the side of the intersection
+        if (abs(hit.intersection_.x - max_.x) < 0.000001) {
+            normal = glm::vec3{1.0, 0.0, 0.0};
+        } else if (abs(hit.intersection_.x - min_.x) < 0.000001) {
+            normal = glm::vec3{-1.0, 0.0, 0.0};
+        } else if (abs(hit.intersection_.y - max_.y) < 0.000001) {
+            normal = glm::vec3{0.0, 1.0, 0.0};
+        } else if (abs(hit.intersection_.y - min_.y) < 0.000001) {
+            normal = glm::vec3{0.0, -1.0, 0.0};
+        } else if (abs(hit.intersection_.z - max_.z) < 0.000001) {
+            normal = glm::vec3{0.0, 0.0, -1.0};
+        } else if (abs(hit.intersection_.z - min_.z) < 0.000001) {
+            normal = glm::vec3{0.0, 0.0, 1.0};
+        }
+
+        // std::cout << "INTERSECT IS GOING ON: \n";
+        // std::cout << hit.intersection_.x << std::endl;
+        // std::cout << max_.x << std::endl;
+        // std::cout << min_.x << std::endl;
+        // std::cout << hit.intersection_.y << std::endl;
+        // std::cout << max_.y << std::endl;
+        // std::cout << min_.y << std::endl;
+        // std::cout << hit.intersection_.z << std::endl;
+        // std::cout << max_.z << std::endl;
+        // std::cout << min_.z << std::endl;
+
         hit.normal_ = normal;
         hit.sptr_ = std::make_shared<Box>(*this);
         hit.hit_ = true;
     }
-
-/*    float inp = std::max(       //Eintrittspunkt
-                    std::max( std::min(t1,t2), std::min(t3,t4) ),
-                    std::min(t5,t6)
-                    );
-
-    float outp = std::min(      //Austrittspunkt
-                    std::min( std::max(t1,t2), std::max(t3,t4) ),
-                    std::max(t5,t6)
-                    );
-
-    if (outp < std::max(0.0f, inp))
-    {
-        return {};
-    }
-
-    //  distance = std::sqrt( ((ray.origin_.x * ray.origin_.x) + (ray.origin_.y * ray.origin_.y) + (ray.origin_.z * ray.origin_.z)) - () )
-    distance = std::sqrt(
-        (ray.direction_.x * (outp - inp) * ray.direction_.x * (outp - inp)) +
-        (ray.direction_.y * (outp - inp) * ray.direction_.y * (outp - inp)) +
-        (ray.direction_.z * (outp - inp) * ray.direction_.z * (outp - inp))
-        );
-
-    return {};
-
-}*/
 
     return hit;
 }
