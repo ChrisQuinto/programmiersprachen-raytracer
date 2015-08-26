@@ -126,13 +126,13 @@ TEST_CASE("test intersectRayBox", "[test intersectRayBox]")
 {
     std::cout << std::endl << "Intersect-Ray-Box Tests: " << std::endl;
 
-    glm::vec3 ray_origin1(0.0,0.0,0.0);
-    glm::vec3 ray_direction1(1.0,1.0,1.0);
-    Ray ray1{ray_origin1,ray_direction1};
+    glm::vec3 ray_origin0(0.0,0.0,0.0);
+    glm::vec3 ray_direction0(1.0,1.0,1.0);
+    Ray ray0{ray_origin0,ray_direction0};
 
-    glm::vec3 ray_origin2(3.0,1.5,4.5);
-    glm::vec3 ray_direction2(-1.0,-1.0,-1.0);
-    Ray ray2{ray_origin2,ray_direction2};
+    glm::vec3 ray_origin1(3.0,1.5,4.5);
+    glm::vec3 ray_direction1(-1.0,-1.0,-1.0);
+    Ray ray1{ray_origin1,ray_direction1};
 
     std::string a = "box0";
     Material mat{};
@@ -150,10 +150,13 @@ TEST_CASE("test intersectRayBox", "[test intersectRayBox]")
     glm::vec3 box_max2(6.0,8.0,6.0);
     Box box2{box_min2, box_max2, c, mat};
 
-    /*Hit temp;
-    REQUIRE(box0.intersect(ray1) == temp);
-    REQUIRE(box1.intersect(ray2) == temp);
-    REQUIRE(box2.intersect(ray2) == temp);*/
+    Hit hit0 = box0.intersect(ray0);
+    std::cout << hit0;
+    Hit hit1 = box0.intersect(ray1);
+    std::cout << hit1;
+    // REQUIRE(box2.intersect(ray1) == temp);
+    // REQUIRE(box0.intersect(ray0) == temp);
+    // REQUIRE(box1.intersect(ray1) == temp);
 }
 
 TEST_CASE("test light", "[test light]"){
