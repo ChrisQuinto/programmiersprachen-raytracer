@@ -89,7 +89,7 @@ TEST_CASE("test sphere", "[test sphere]")
     std::cout << sphere1;
 }
 
-TEST_CASE("test intersectRaySphere", "[test intersectRaySphere]")
+/*TEST_CASE("test intersectRaySphere", "[test intersectRaySphere]")
 {
     std::cout << std::endl << "Intersect-Ray-Sphere Tests: " << std::endl;
 
@@ -120,7 +120,7 @@ TEST_CASE("test intersectRaySphere", "[test intersectRaySphere]")
     REQUIRE(distance == Approx(4.0f));
     REQUIRE(sphere1.intersect(ray2, distance) == true);
     REQUIRE(sphere2.intersect(ray2, distance) == false);
-}
+}*/
 
 TEST_CASE("test intersectRayBox", "[test intersectRayBox]")
 {
