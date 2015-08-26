@@ -153,13 +153,16 @@ TEST_CASE("test intersectRayBox", "[test intersectRayBox]")
     std::cout << hit0;
     Hit hit1 = box0.intersect(ray1);
     std::cout << hit1;
-    Hit hit2 = box1.intersect(ray1);
+    Hit hit2 = box1.intersect(ray0);
     std::cout << hit2;
-    Hit hit3 = box2.intersect(ray1);
+    Hit hit3 = box1.intersect(ray1);
     std::cout << hit3;
-    // REQUIRE(box2.intersect(ray1) == temp);
-    // REQUIRE(box0.intersect(ray0) == temp);
-    // REQUIRE(box1.intersect(ray1) == temp);
+    Hit hit4 = box2.intersect(ray0);
+    std::cout << hit4;
+    Hit hit5 = box2.intersect(ray1);
+    std::cout << hit5;
+    REQUIRE(hit0.hit_ == true);
+    REQUIRE(hit1.hit_ == false);
 }
 
 TEST_CASE("test light", "[test light]"){
