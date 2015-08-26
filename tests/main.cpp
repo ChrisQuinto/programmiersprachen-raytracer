@@ -210,7 +210,7 @@ TEST_CASE("renderer Test", "[renderer test]"){
     Sdfloader loader{"./test.txt"};
     std::shared_ptr<Scene> s = loader.loadscene("./test.txt");
     Renderer renderer(s);
-    //Renderer renderer(scene);
+    renderer.render();
 }
 
 

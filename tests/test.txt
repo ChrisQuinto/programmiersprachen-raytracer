@@ -1,5 +1,5 @@
 define camera eye 45.0
-define renderer test
+renderer test.ppm
 define material red 1 0 0 1 0 0 1 0 0 1
 define material blue 0 0 1 0 0 1 0 0 1 1
 define background 1 1 0
