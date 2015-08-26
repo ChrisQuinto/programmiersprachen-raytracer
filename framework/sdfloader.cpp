@@ -33,7 +33,6 @@ std::shared_ptr<Scene> Sdfloader::loadscene(std::string file) const{
     Color amblight;
     Color background;
     std::map<std::string, std::shared_ptr<Material>> matmap;
-    std::shared_ptr<Scene> scene_ptr;
     std::vector<std::shared_ptr<Light>> lightvec;
     std::vector<std::shared_ptr<Shape>> shapevec;
 
@@ -48,7 +47,7 @@ std::shared_ptr<Scene> Sdfloader::loadscene(std::string file) const{
 
                 datei >> filename;
 
-                std::cout << "renderer worked \n";
+                // std::cout << "Renderer worked. \n";
             }
 
             else if (line.compare("camera") == 0){
@@ -76,7 +75,7 @@ std::shared_ptr<Scene> Sdfloader::loadscene(std::string file) const{
                 cam.xres_ = xres;
                 cam.yres_ = yres;
 
-                std::cout << "camera worked \n";
+                // std::cout << "Camera worked. \n";
             }
 
             else if (line.compare("define") == 0){
@@ -129,7 +128,7 @@ std::shared_ptr<Scene> Sdfloader::loadscene(std::string file) const{
 
                     /*Material mat{name, ka, kd, ks, m};
                     matmap[name] = mat;*/
-                    std::cout << "material worked \n";
+                    // std::cout << "Material worked. \n";
                 }
 
                 else if (line.compare("amblight") == 0){
@@ -148,7 +147,7 @@ std::shared_ptr<Scene> Sdfloader::loadscene(std::string file) const{
 
                     amblight = amb;
 
-                    std::cout << "amblight worked \n";
+                    // std::cout << "Amblight worked. \n";
                 }
 
                 else if (line.compare("background") == 0){
@@ -167,7 +166,7 @@ std::shared_ptr<Scene> Sdfloader::loadscene(std::string file) const{
 
                     background = back;
 
-                    std::cout << "background worked \n";
+                    // std::cout << "Background worked. \n";
                 }
 
                 else if (line.compare("light") == 0){
@@ -202,7 +201,7 @@ std::shared_ptr<Scene> Sdfloader::loadscene(std::string file) const{
                         );
                     lightvec.push_back(light);
 
-                    std::cout << "light worked \n";
+                    // std::cout << "Light worked. \n";
                 }
 
                 else if (line.compare("shape") == 0){
@@ -240,7 +239,7 @@ std::shared_ptr<Scene> Sdfloader::loadscene(std::string file) const{
                             );
                         shapevec.push_back(s_ptr);
 
-                        std::cout << "box worked \n";
+                        // std::cout << "Box worked. \n";
                     }
 
                     if (line.compare("sphere") == 0){
@@ -265,14 +264,14 @@ std::shared_ptr<Scene> Sdfloader::loadscene(std::string file) const{
 
                         datei >> line;
 
-                        std::cout << "sphere eingelesen \n";
+                        // std::cout << "Sphere wurde eingelesen. \n";
 
                         std::shared_ptr<Shape> sphere = std::make_shared<Sphere>(
                             Sphere{pos, r,name, *matmap[line]}
                             );
                         shapevec.push_back(sphere);
 
-                        std::cout << "sphere worked \n";
+                        // std::cout << "Sphere worked. \n";
                     }
 
                 }
@@ -289,6 +288,7 @@ std::shared_ptr<Scene> Sdfloader::loadscene(std::string file) const{
       else{
           std::cout << "No file found." << std::endl;
       }
+
 
     std::cout << "all worked \n";
 

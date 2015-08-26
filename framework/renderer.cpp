@@ -47,9 +47,11 @@ void Renderer::render()
         Hit hit = (*i)->intersect(ray);
 
         std::map<std::shared_ptr<Shape>, float> shp;
-
+        float shortest = 999999.9;
           if(hit.hit_ == true){
-
+            if(hit.distance_ < shortest){
+              shortest = hit.distance_;
+            }
           }
 
       }

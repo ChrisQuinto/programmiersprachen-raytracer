@@ -188,12 +188,13 @@ TEST_CASE("test camera", "[test camera]"){
 
 TEST_CASE("sdfloader_material", "[sdfloader]"){
     Sdfloader loader{"./materials.txt"};
-    Scene s = loader.loadscene("./materials.txt");
+    std::shared_ptr<Scene> s = loader.loadscene("./materials.txt");
 }
 
 TEST_CASE("sdfloader Test", "[sdfloader test]"){
     Sdfloader loader{"./test.txt"};
-    Scene s = loader.loadscene("./test.txt");
+    std::shared_ptr<Scene> sptr = loader.loadscene("./test.txt");
+    Scene s = *sptr;
     std::cout << "\n" ;
     std::cout << "Ambientes Licht: \n" << s.amblight << std::endl;
     std::cout << "Background-Color: \n" << s.background << std::endl;
