@@ -44,7 +44,7 @@ void Renderer::render()
         glm::vec3 direction (-scene_->camera.xres()/2-0.5+x, -scene_->camera.yres()/2-0.5+y, z);
         Ray ray = scene_->camera.castray(direction);
         std::shared_ptr<Shape> first_hit;
-        float shortest = 999999.9;
+        double shortest = 999999.9;
         for (std::vector<std::shared_ptr<Shape>>::iterator i =scene_->shapes_ptr.begin();i != scene_->shapes_ptr.end();++i){
           Hit hit = (*i)->intersect(ray);
 
@@ -55,6 +55,7 @@ void Renderer::render()
               if(hit.distance_ < shortest){
                 shortest = hit.distance_;
                 first_hit = hit.sptr_;
+                p.color = (*first_hit).material().kd();
               }
             }
 
@@ -65,7 +66,7 @@ void Renderer::render()
 
 
 
-
+      //std::cout << p.color << std::endl;
       write(p);
     }
   }
