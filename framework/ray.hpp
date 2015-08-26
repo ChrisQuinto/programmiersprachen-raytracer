@@ -1,6 +1,8 @@
 #ifndef RAY_BUW_HPP
 #define RAY_BUW_HPP
 #include <glm/vec3.hpp>
+#include <iostream>
+#include <string>
 
 struct Ray
 {
