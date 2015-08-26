@@ -10,15 +10,31 @@ Box::Box() :
 
 Box::Box(glm::vec3 const& minimum, glm::vec3 const& maximum) :
     Box::Shape(),
-    min_{minimum},
-    max_{maximum} {
+    min_{
+        min_.x = std::min(minimum.x,maximum.x),
+        min_.y = std::min(minimum.y,maximum.y),
+        min_.z = std::min(minimum.z,maximum.z)
+    },
+    max_{
+        max_.x = std::max(minimum.x,maximum.x),
+        max_.y = std::max(minimum.y,maximum.y),
+        max_.z = std::max(minimum.z,maximum.z)
+    } {
         // std::cout << "Konstruktor-Aufruf fuer Box: " << name() << "\n";
     }
 
 Box::Box(glm::vec3 const& minimum, glm::vec3 const& maximum, std::string n, Material const& m) :
     Box::Shape(n,m),
-    min_{minimum},
-    max_{maximum} {
+    min_{
+        min_.x = std::min(minimum.x,maximum.x),
+        min_.y = std::min(minimum.y,maximum.y),
+        min_.z = std::min(minimum.z,maximum.z)
+    },
+    max_{
+        max_.x = std::max(minimum.x,maximum.x),
+        max_.y = std::max(minimum.y,maximum.y),
+        max_.z = std::max(minimum.z,maximum.z)
+    } {
         // std::cout << "Konstruktor-Aufruf fuer Box: " << name() << "\n";
     }
 
