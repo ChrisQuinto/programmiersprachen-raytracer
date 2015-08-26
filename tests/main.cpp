@@ -54,7 +54,6 @@ TEST_CASE("test box", "[test box]")
     REQUIRE(box2.area() == Approx(52.0));
     REQUIRE(box2.volume() == Approx(24.0));
 
-    std::cout << std::endl;
     std::string b = "Box3";
     Material mat{};
     Box box3{glm::vec3{1.0,1.0,1.0}, glm::vec3{2.0,2.0,2.0}, b, mat};
@@ -65,7 +64,7 @@ TEST_CASE("test box", "[test box]")
 
 TEST_CASE("test sphere", "[test sphere]")
 {
-    std::cout << std::endl << "Sphere Tests: " << std::endl;
+    std::cout << "Sphere Tests: " << std::endl;
 
     Sphere sphere0;
     glm::vec3 vec0{};
@@ -124,7 +123,7 @@ TEST_CASE("test sphere", "[test sphere]")
 
 TEST_CASE("test intersectRayBox", "[test intersectRayBox]")
 {
-    std::cout << std::endl << "Intersect-Ray-Box Tests: " << std::endl;
+    std::cout << "Intersect-Ray-Box Tests: " << std::endl;
 
     glm::vec3 ray_origin0(0.0,0.0,0.0);
     glm::vec3 ray_direction0(1.0,1.0,1.0);
