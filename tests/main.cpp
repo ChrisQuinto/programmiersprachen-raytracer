@@ -208,6 +208,8 @@ TEST_CASE("sdfloader Test", "[sdfloader test]"){
     std::cout << *s.materials["blue"] << std::endl;
     std::cout << *s.shapes_ptr[0];
     std::cout << *s.shapes_ptr[1];
+    std::cout << *s.shapes_ptr[2];
+    std::cout << *s.shapes_ptr[3];
     std::cout << s.camera;
     std::cout << *s.lights[0];
 }
