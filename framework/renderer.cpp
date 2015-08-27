@@ -48,7 +48,8 @@ void Renderer::render()
         //std::cout << ray << std::endl;
         std::shared_ptr<Shape> first_hit;
         double shortest = 999999.9;
-        for (std::vector<std::shared_ptr<Shape>>::iterator i =scene_->shapes_ptr.begin();i != scene_->shapes_ptr.end();++i){
+        for (std::vector<std::shared_ptr<Shape>>::iterator i = scene_->shapes_ptr.begin();i != scene_->shapes_ptr.end();++i){
+
           Hit hit = (*i)->intersect(ray);
 
           // std::map<std::shared_ptr<Shape>, float> shp;
