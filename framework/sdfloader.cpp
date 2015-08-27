@@ -37,7 +37,9 @@ std::shared_ptr<Scene> Sdfloader::loadscene(std::string file) const{
     std::vector<std::shared_ptr<Shape>> shapevec;
 
     if (datei.good()){
-        std::cout << "File is good." << std::endl;
+
+        std::cout << "Importing file." << std::endl;
+
         while(datei >> line){
             if (line.compare("#") == 0 || line.compare("") == 0){
               continue;
@@ -239,6 +241,9 @@ std::shared_ptr<Scene> Sdfloader::loadscene(std::string file) const{
                             );
                         shapevec.push_back(s_ptr);
 
+                        /*std::cout << "Tiefe der Box "
+                                  << *(*s_ptr).name_ << ": "
+                                  << s_ptr->min().z << "\n";*/
                         // std::cout << "Box worked. \n";
                     }
 
@@ -260,7 +265,7 @@ std::shared_ptr<Scene> Sdfloader::loadscene(std::string file) const{
                         flt >> z;
                         glm::vec3 pos(x,y,z);
                         flt.clear();
-                        std::cout << x << std::endl;
+                        std::cout << z << std::endl;
 
                         datei >> line;
                         flt << line;
@@ -296,7 +301,7 @@ std::shared_ptr<Scene> Sdfloader::loadscene(std::string file) const{
       }
 
 
-    std::cout << "all worked \n";
+    std::cout << "File-Reader worked. \n";
 
     std::shared_ptr<Scene> sceneptr = std::make_shared<Scene>(
         Scene {
@@ -309,6 +314,6 @@ std::shared_ptr<Scene> Sdfloader::loadscene(std::string file) const{
             shapevec
         }
     );
-    return sceneptr;
 
+    return sceneptr;
 }
