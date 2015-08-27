@@ -43,7 +43,7 @@ void Renderer::render()
         Pixel p(x,y);
         glm::vec3 direction (-(scene_->camera.xres()/2) -0.5 + x, -(scene_->camera.yres()/2) - 0.5 + y, -z);
         Ray ray = scene_->camera.castray(direction);
-        std::cout << ray << std::endl;
+        // std::cout << ray << std::endl;
         std::shared_ptr<Shape> first_hit;
         double shortest = 999999.9;
         for (std::vector<std::shared_ptr<Shape>>::iterator i =scene_->shapes_ptr.begin();i != scene_->shapes_ptr.end();++i){
