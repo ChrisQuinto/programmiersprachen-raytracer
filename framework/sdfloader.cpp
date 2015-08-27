@@ -246,21 +246,27 @@ std::shared_ptr<Scene> Sdfloader::loadscene(std::string file) const{
 
                         datei >> name;
 
-                        float x, y, z;
+                        int x, y, z;
                         datei >> line;
-                        flt << line << ' ';
-                        datei >> line;
-                        flt << line << ' ';
+                        flt << line ;
+                        flt >> x;
+                        flt.clear();
                         datei >> line;
                         flt << line;
-                        flt >> x >> y >> z;
+                        flt >> y;
+                        flt.clear();
+                        datei >> line;
+                        flt << line;
+                        flt >> z;
                         glm::vec3 pos(x,y,z);
                         flt.clear();
+                        std::cout << x << std::endl;
 
                         datei >> line;
                         flt << line;
                         float r;
                         flt >> r;
+                        flt.clear();
 
                         datei >> line;
 
