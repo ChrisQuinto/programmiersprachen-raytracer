@@ -209,10 +209,10 @@ TEST_CASE("sdfloader Test", "[sdfloader test]"){
     std::cout << "Background-Color: \n" << s.background << std::endl;
     std::cout << *s.materials["red"] << std::endl;
     std::cout << *s.materials["blue"] << std::endl;
-    std::cout << *s.shapes_ptr[0];
-    //std::cout << *s.shapes_ptr[1];
-    //std::cout << *s.shapes_ptr[2];
-    //std::cout << *s.shapes_ptr[3];
+
+    for (std::vector<std::shared_ptr<Shape>>::iterator i = sptr->shapes_ptr.begin(); i != sptr->shapes_ptr.end(); ++i){
+        std::cout << *(*i);
+    }
     std::cout << s.camera;
     std::cout << *s.lights[0];
 }
