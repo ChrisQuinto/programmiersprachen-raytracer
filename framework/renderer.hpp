@@ -26,6 +26,7 @@ public:
     Renderer(std::shared_ptr<Scene> scene);
 
     void render();
+    void shade();
     void write(Pixel const& p);
 
     inline std::vector<Color> const& colorbuffer() const
