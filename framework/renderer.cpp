@@ -62,8 +62,9 @@ void Renderer::render()
                 first_hit = hit.sptr_;
 
                 Color color = (*first_hit).material().kd();
-
+                //std::cout << ray <<' ' << hit << ' ' << color << std::endl;
                 p.color = shade(ray, hit, color);
+                std::cout << p << std::endl;
               }
             }
 
