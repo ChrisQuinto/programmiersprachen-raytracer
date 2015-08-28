@@ -26,7 +26,7 @@ public:
     Renderer(std::shared_ptr<Scene> scene);
 
     void render();
-    void shade();
+    Color shade(Ray const& ray, Hit const& hit, Color color);
     void write(Pixel const& p);
 
     inline std::vector<Color> const& colorbuffer() const

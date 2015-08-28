@@ -59,7 +59,9 @@ void Renderer::render()
               if(hit.distance_ < shortest){
                 shortest = hit.distance_;
                 first_hit = hit.sptr_;
-                p.color = (*first_hit).material().kd();
+
+                Color color = (*first_hit).material().kd();
+                p.color = shade(ray, hit, color);
               }
             }
 
@@ -73,6 +75,61 @@ void Renderer::render()
     }
   }
   ppm_.save();
+}
+
+Color Renderer::shade(Ray const& ray, Hit const& hit, Color color){
+
+  for (std::vector<std::shared_ptr<Light>>::iterator i = scene_->lights.begin();i != scene_->lights.end();++i){
+    Ray sunray((*i)->pos(), hit.intersection_ - (*i)->pos() );
+
+    std::vector<Color> c;
+
+    for (std::vector<std::shared_ptr<Shape>>::iterator j = scene_->shapes_ptr.begin();j != scene_->shapes_ptr.end();++j){
+
+          Hit light_hit = (*j)->intersect(ray);
+          if(light_hit.hit_ == true){
+            continue;
+          }
+
+          else{
+                glm::vec3 sunvec = glm::normalize((*i)->pos() - hit.intersection_);
+
+                Color c_l = color * (*i)->dl() * glm::dot(hit.normal_, sunvec) /*+ (*j)->material().ka() * (*scene_).amblight*/;
+                c.push_back(c_l);
+          }
+
+        }
+    //glm::vec3 sunvec = glm::normalize((*i)->pos() - hit.intersection_);
+    //glm::dot(hit.normal_, sunvec);
+
+
+    //std::shared_ptr<Shape>
+    Color kd_total (0.0,0.0,0.0);
+    Color amb = (*hit.sptr_).material().ka() * (*scene_).amblight;
+    int csize = sizeof(c);
+    if(csize = 0){
+
+
+
+      return amb;
+    }
+
+    else{
+      for (std::vector<Color>::iterator k = c.begin();k != c.end();++k){
+
+        kd_total += *k;
+
+        }
+
+      }
+
+      kd_total = kd_total/sizeof(c);
+
+      color = kd_total + amb;
+
+      return color;
+    }
+
 }
 
 void Renderer::write(Pixel const& p)
