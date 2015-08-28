@@ -64,7 +64,7 @@ void Renderer::render()
                 Color color = (*first_hit).material().kd();
                 //std::cout << ray <<' ' << hit << ' ' << color << std::endl;
                 p.color = shade(ray, hit, color);
-                std::cout << p << std::endl;
+                //std::cout << color << std::endl;
               }
             }
 
@@ -96,10 +96,12 @@ Color Renderer::shade(Ray const& ray, Hit const& hit, Color color){
 
           else{
                 glm::vec3 sunvec = glm::normalize((*i)->pos() - hit.intersection_);
+                //std::cout << sunvec << std::endl;
 
-                Color c_l = color * (*i)->dl() * glm::dot(hit.normal_, sunvec) /*+ (*j)->material().ka() * (*scene_).amblight*/;
+                Color c_l = color * (*i)->dl() * (1-sqrt(pow(glm::dot(hit.normal_, sunvec),2))) /*+ (*j)->material().ka() * (*scene_).amblight*/;
+                //std::cout << sqrt(pow(glm::dot(hit.normal_, sunvec),2)) << std::endl;
                 c.push_back(c_l);
-                //std::cout << "help me!" << std::endl;
+                std::cout << c_l << std::endl;
           }
 
         }
@@ -118,6 +120,7 @@ Color Renderer::shade(Ray const& ray, Hit const& hit, Color color){
 
 
       return amb;
+      //std::cout << amb << std::endl;
     }
 
     else{
@@ -134,6 +137,7 @@ Color Renderer::shade(Ray const& ray, Hit const& hit, Color color){
       color = kd_total + amb;
 
       return color;
+      std::cout << color << std::endl;
     }
 
 }
