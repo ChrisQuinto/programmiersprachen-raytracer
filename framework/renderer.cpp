@@ -61,6 +61,7 @@ void Renderer::render()
                 first_hit = hit.sptr_;
 
                 Color color = (*first_hit).material().kd();
+
                 p.color = shade(ray, hit, color);
               }
             }
@@ -96,9 +97,12 @@ Color Renderer::shade(Ray const& ray, Hit const& hit, Color color){
 
                 Color c_l = color * (*i)->dl() * glm::dot(hit.normal_, sunvec) /*+ (*j)->material().ka() * (*scene_).amblight*/;
                 c.push_back(c_l);
+                //std::cout << "help me!" << std::endl;
           }
 
         }
+
+
     //glm::vec3 sunvec = glm::normalize((*i)->pos() - hit.intersection_);
     //glm::dot(hit.normal_, sunvec);
 
