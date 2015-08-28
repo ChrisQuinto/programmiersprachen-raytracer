@@ -14,7 +14,8 @@
 Renderer::Renderer(std::shared_ptr<Scene> scene) :
     scene_{scene},
     colorbuffer_(scene->camera.xres()*scene->camera.yres(), Color{}), //scene-> äquivalent zu (*scene).
-    ppm_(scene->camera.xres(), scene->camera.yres(), scene->filename) {std::cout << "renderer built" << std::endl;}
+    ppm_(scene->camera.xres(), scene->camera.yres(), scene->filename) {std::cout << "Konstruktor Aufruf fuer Renderer." << std::endl;
+}
 
 /*void Renderer::render()
 {
@@ -39,7 +40,7 @@ void Renderer::render()
 {
     //z ist Entfernung der Camera zur Scene aus Winkel und Aufloesung berechnet
     int z = (scene_->camera.xres()/2)/(tan(scene_->camera.fovx()/360 * M_PI));
-    std::cout << -z << std::endl;
+    std::cout << "\nMinimale Bildtiefe: " << -z << std::endl;
     for (int y = 0; y < scene_->camera.yres(); ++y) {
       for (int x = 0; x < scene_->camera.xres(); ++x) {
         Pixel p(x,y);
