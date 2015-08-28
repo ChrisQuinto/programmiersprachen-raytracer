@@ -100,7 +100,7 @@ Color Renderer::shade(Ray const& ray, Hit const& hit, Color color)
             Color c_l = color * (*i)->dl() * (1-sqrt(pow(glm::dot(hit.normal_, sunvec),2))) /*+ (*j)->material().ka() * (*scene_).amblight*/;
             //std::cout << sqrt(pow(glm::dot(hit.normal_, sunvec),2)) << std::endl;
             c.push_back(c_l);
-            std::cout << c_l << std::endl;
+            //std::cout << c_l << std::endl;
             }
         }
 
@@ -126,10 +126,8 @@ Color Renderer::shade(Ray const& ray, Hit const& hit, Color color)
         kd_total = kd_total/sizeof(c);
 
         color = kd_total + amb;
-
-        return color;
-        std::cout << color << std::endl;
     }
+	return color;
 }
 
 void Renderer::write(Pixel const& p)
