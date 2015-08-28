@@ -128,8 +128,6 @@ std::shared_ptr<Scene> Sdfloader::loadscene(std::string file) const{
                     std::shared_ptr<Material> temp_ptr = std::make_shared<Material>(Material{name,ka,kd,ks,m});
                     matmap.insert({name,temp_ptr});
 
-                    /*Material mat{name, ka, kd, ks, m};
-                    matmap[name] = mat;*/
                     // std::cout << "Material worked. \n";
                 }
 
