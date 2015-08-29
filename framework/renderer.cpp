@@ -109,14 +109,14 @@ Color Renderer::shade(Ray const& ray, Hit const& hit, Color color)
 =======
         } else {
 >>>>>>> 0fc9960b78eeb8758e34247aaf45803833192c28*/
-
-            glm::vec3 sunvec = glm::normalize((*i)->pos() - hit.intersection_);
+          else{
+              glm::vec3 sunvec = glm::normalize((*i)->pos() - hit.intersection_);
             //std::cout << sunvec << std::endl;
-            Color c_l = color * (*i)->dl() * (sqrt(pow(glm::dot(hit.normal_, sunvec),2))) /*+ (*j)->material().ka() * (*scene_).amblight*/;
+              Color c_l = color * (*i)->dl() * (sqrt(pow(glm::dot(hit.normal_, sunvec),2))) /*+ (*j)->material().ka() * (*scene_).amblight*/;
             //std::cout << sqrt(pow(glm::dot(hit.normal_, sunvec),2)) << std::endl;
-            c.push_back(c_l);
+              c.push_back(c_l);
             //std::cout << c_l << std::endl;
-
+            }
         }
 
         //glm::vec3 sunvec = glm::normalize((*i)->pos() - hit.intersection_);
