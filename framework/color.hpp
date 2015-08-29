@@ -94,9 +94,9 @@ struct Color
 
     Color operator*(float const& x)
     {
-      r *= x;
-      g *= x;
-      b *= x;
+      r = r * x;
+      g = r * x;
+      b = r * x;
       return *this;
     }
 
