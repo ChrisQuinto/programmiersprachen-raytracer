@@ -28,20 +28,20 @@ define background .2 .2 .2
 define amblight .3 .4 .5
 
 #LIGHT
-define light sun 1000 700 0 .2 .2 .2
+define light sun 0 0 -125 1 1 1
 
 #BOXES boxname p1 p2 mat
 define shape box b0 -130 -100 -100 130 -120 -400 white
 
-define shape box b1 -20 15 -200 -10 25 -150 cyan
-define shape box b2 10 15 -200 20 25 -150 azure
-define shape box b3 -20 -5 -200 -10 5 -150 azure
-define shape box b4 10 -5 -200 20 5 -150 blue
-define shape box b5 -20 -25 -200 -10 -15 -150 blue
-define shape box b6 10 -25 -200 20 -15 -150 darkblue
+define shape box b1 -30 20 -200 -10 40 -150 cyan
+define shape box b2 10 20 -200 30 40 -150 azure
+define shape box b3 -30 -10 -200 -10 10 -150 azure
+define shape box b4 10 -10 -200 30 10 -150 blue
+define shape box b5 -30 -40 -200 -10 -20 -150 blue
+define shape box b6 10 -40 -200 30 -20 -150 darkblue
 
 #SPHERES spherename pos r mat
-define shape sphere sp0 0 0 -300 150 orange
+define shape sphere sp0 0 0 -400 150 orange
 
 define shape sphere sp1 90 0 -150 20 red
 define shape sphere sp2 -90 0 -150 20 red

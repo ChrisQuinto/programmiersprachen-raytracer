@@ -80,66 +80,64 @@ void Renderer::render()
   ppm_.save();
 }
 
-Color Renderer::shade(Ray const& ray, Hit const& hit, Color color){
+Color Renderer::shade(Ray const& ray, Hit const& hit, Color color)
+{
+    for (std::vector<std::shared_ptr<Light>>::iterator i = scene_->lights.begin();i != scene_->lights.end();++i){
 
-  for (std::vector<std::shared_ptr<Light>>::iterator i = scene_->lights.begin();i != scene_->lights.end();++i){
-    Ray sunray((*i)->pos(), hit.intersection_ - (*i)->pos() );
+        Ray sunray((*i)->pos(), hit.intersection_ - (*i)->pos() );
+        std::vector<Color> c;
 
-    std::vector<Color> c;
+        for (std::vector<std::shared_ptr<Shape>>::iterator j = scene_->shapes_ptr.begin();j != scene_->shapes_ptr.end();++j){
 
-    for (std::vector<std::shared_ptr<Shape>>::iterator j = scene_->shapes_ptr.begin();j != scene_->shapes_ptr.end();++j){
-
-          Hit light_hit = (*j)->intersect(ray);
-          if(light_hit.hit_ == true){
+            Hit light_hit = (*j)->intersect(ray);
+            if(light_hit.hit_ == true){
             continue;
-          }
 
-          else{
-                glm::vec3 sunvec = glm::normalize((*i)->pos() - hit.intersection_);
-                //std::cout << sunvec << std::endl;
-
-                Color c_l = color * (*i)->dl() * (sqrt(pow(glm::dot(hit.normal_, sunvec),2))) /*+ (*j)->material().ka() * (*scene_).amblight*/;
+/*                Color c_l = color * (*i)->dl() * (sqrt(pow(glm::dot(hit.normal_, sunvec),2))) + (*j)->material().ka() * (*scene_).amblight;
                 //std::cout << sqrt(pow(glm::dot(hit.normal_, sunvec),2)) << std::endl;
                 c.push_back(c_l);
                 //std::cout << c_l << std::endl;
           }
+=======
+        } else {
+>>>>>>> 0fc9960b78eeb8758e34247aaf45803833192c28*/
 
+            glm::vec3 sunvec = glm::normalize((*i)->pos() - hit.intersection_);
+            //std::cout << sunvec << std::endl;
+            Color c_l = color * (*i)->dl() * (1-sqrt(pow(glm::dot(hit.normal_, sunvec),2))) /*+ (*j)->material().ka() * (*scene_).amblight*/;
+            //std::cout << sqrt(pow(glm::dot(hit.normal_, sunvec),2)) << std::endl;
+            c.push_back(c_l);
+            //std::cout << c_l << std::endl;
+            }
         }
 
+        //glm::vec3 sunvec = glm::normalize((*i)->pos() - hit.intersection_);
+        //glm::dot(hit.normal_, sunvec);
+        //std::shared_ptr<Shape>
+        Color kd_total (0.0,0.0,0.0);
+        Color amb;
+        amb.r = (*hit.sptr_).material().ka().r * (*scene_).amblight.r;
+        amb.g = (*hit.sptr_).material().ka().g * (*scene_).amblight.g;
+        amb.b = (*hit.sptr_).material().ka().b * (*scene_).amblight.b;
+        int csize = sizeof(c);
 
-    //glm::vec3 sunvec = glm::normalize((*i)->pos() - hit.intersection_);
-    //glm::dot(hit.normal_, sunvec);
-
-
-    //std::shared_ptr<Shape>
-    Color kd_total (0.0,0.0,0.0);
-    Color amb = (*hit.sptr_).material().ka() * (*scene_).amblight;
-    int csize = sizeof(c);
-    if(csize = 0){
-
-
-
-      return amb;
-      //std::cout << amb << std::endl;
-    }
-
-    else{
-      for (std::vector<Color>::iterator k = c.begin();k != c.end();++k){
-
-        kd_total += *k;
-
+        if(csize = 0){
+            return amb;
+            //std::cout << amb << std::endl;
+        } else {
+            for (std::vector<Color>::iterator k = c.begin();k != c.end();++k){
+                kd_total += *k;
+            }
         }
 
-      }
+        kd_total = kd_total/sizeof(c);
 
-      kd_total = kd_total/sizeof(c);
 
       color = kd_total + amb;
 
       return color;
       //std::cout << color << std::endl;
     }
-
 }
 
 void Renderer::write(Pixel const& p)
