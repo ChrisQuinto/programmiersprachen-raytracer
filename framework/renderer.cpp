@@ -82,6 +82,13 @@ void Renderer::render()
 
 Color Renderer::shade(Ray const& ray, Hit const& hit, Color color)
 {
+
+  Color kd_total (0.0,0.0,0.0);
+  Color amb;
+  amb.r = (*hit.sptr_).material().ka().r * (*scene_).amblight.r;
+  amb.g = (*hit.sptr_).material().ka().g * (*scene_).amblight.g;
+  amb.b = (*hit.sptr_).material().ka().b * (*scene_).amblight.b;
+
     for (std::vector<std::shared_ptr<Light>>::iterator i = scene_->lights.begin();i != scene_->lights.end();++i){
 
         Ray sunray((*i)->pos(), hit.intersection_ - (*i)->pos() );
@@ -92,6 +99,7 @@ Color Renderer::shade(Ray const& ray, Hit const& hit, Color color)
             Hit light_hit = (*j)->intersect(ray);
             if(light_hit.hit_ == true){
             continue;
+          }
 
 /*                Color c_l = color * (*i)->dl() * (sqrt(pow(glm::dot(hit.normal_, sunvec),2))) + (*j)->material().ka() * (*scene_).amblight;
                 //std::cout << sqrt(pow(glm::dot(hit.normal_, sunvec),2)) << std::endl;
@@ -104,21 +112,17 @@ Color Renderer::shade(Ray const& ray, Hit const& hit, Color color)
 
             glm::vec3 sunvec = glm::normalize((*i)->pos() - hit.intersection_);
             //std::cout << sunvec << std::endl;
-            Color c_l = color * (*i)->dl() * (1-sqrt(pow(glm::dot(hit.normal_, sunvec),2))) /*+ (*j)->material().ka() * (*scene_).amblight*/;
+            Color c_l = color * (*i)->dl() * (sqrt(pow(glm::dot(hit.normal_, sunvec),2))) /*+ (*j)->material().ka() * (*scene_).amblight*/;
             //std::cout << sqrt(pow(glm::dot(hit.normal_, sunvec),2)) << std::endl;
             c.push_back(c_l);
             //std::cout << c_l << std::endl;
-            }
+
         }
 
         //glm::vec3 sunvec = glm::normalize((*i)->pos() - hit.intersection_);
         //glm::dot(hit.normal_, sunvec);
         //std::shared_ptr<Shape>
-        Color kd_total (0.0,0.0,0.0);
-        Color amb;
-        amb.r = (*hit.sptr_).material().ka().r * (*scene_).amblight.r;
-        amb.g = (*hit.sptr_).material().ka().g * (*scene_).amblight.g;
-        amb.b = (*hit.sptr_).material().ka().b * (*scene_).amblight.b;
+
         int csize = sizeof(c);
 
         if(csize = 0){
