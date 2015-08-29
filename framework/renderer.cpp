@@ -136,12 +136,9 @@ Color Renderer::shade(Ray const& ray, Hit const& hit, Color color)
 
         kd_total = kd_total/sizeof(c);
 
-
-      color = kd_total + amb;
-
-      return color;
-      //std::cout << color << std::endl;
+        color = kd_total + amb;
     }
+    return color;
 }
 
 void Renderer::write(Pixel const& p)
