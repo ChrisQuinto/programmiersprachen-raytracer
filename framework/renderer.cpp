@@ -84,12 +84,15 @@ void Renderer::render()
 Color Renderer::shade(Ray const& ray, Hit const& hit, Color color)
 {
 
-  std::vector<Color> c;
+  std::vector<Color> c{};
   Color amb;
   amb.r = (*hit.sptr_).material().ka().r * (*scene_).amblight.r;
   amb.g = (*hit.sptr_).material().ka().g * (*scene_).amblight.g;
   amb.b = (*hit.sptr_).material().ka().b * (*scene_).amblight.b;
   Color kd_total (0.0,0.0,0.0);
+  int csize = c.size();
+  //std::cout << csize << std::endl;
+
 
   for (std::vector<std::shared_ptr<Light>>::iterator i = scene_->lights.begin();i != scene_->lights.end();++i){
 
@@ -99,16 +102,18 @@ Color Renderer::shade(Ray const& ray, Hit const& hit, Color color)
     for (std::vector<std::shared_ptr<Shape>>::iterator j = scene_->shapes_ptr.begin();j != scene_->shapes_ptr.end();++j){
 
       Hit light_hit = (*j)->intersect(sunray);
-      glm::vec3 sunvec = glm::normalize((*i)->pos() - hit.intersection_);
+      glm::vec3 sunvec = (*i)->pos() - hit.intersection_;
+      //glm::vec3 sunvec = glm::normalize((*i)->pos() - hit.intersection_);
 
       if(light_hit.distance_ < (sqrt((pow(sunvec.x, 2) + pow(sunvec.y, 2) + pow(sunvec.z,2))))) {
-            c.clear();
+            c.empty();
             break;
           }
 
       else {
 
-
+        glm::vec3 sunvec = glm::normalize((*i)->pos() - hit.intersection_);
+        hit.normal_ = glm::normalize(hit.normal_);
         float winkel = sqrt(pow(glm::dot(hit.normal_, sunvec), 2.0));
 
         c_l.r = (*i)->dl().r * winkel;
@@ -126,9 +131,9 @@ Color Renderer::shade(Ray const& ray, Hit const& hit, Color color)
 
   }
 
-  int csize = sizeof(c);
+  csize = c.size();
 
-  if(csize = 0){
+  if(c[0].r == 0){
     return amb;
     //std::cout << amb << std::endl;
     }
@@ -138,7 +143,7 @@ Color Renderer::shade(Ray const& ray, Hit const& hit, Color color)
               //std::cout << kd_total << std::endl;
             }
         }
-
+  //std::cout << csize << std::endl;
 
         //kd_total = kd_total/sizeof(c);
 
