@@ -32,6 +32,14 @@ Material const& Shape::material() const {
     return material_;
 }
 
+glm::mat4x4 const& Shape::matrix() const {
+    return matrix_;
+}
+
+void Shape::setmatrix(glm::mat4x4 const& newmatrix) {
+    matrix_ = newmatrix;
+}
+
 std::ostream& Shape::print(std::ostream& os) const {
     os << "Name: " << name() << "\n";
     os << material();

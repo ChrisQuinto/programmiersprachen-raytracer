@@ -10,7 +10,7 @@
 #include "hit.hpp"
 #include "material.hpp"
 
-class Box;
+class Box; //for bounding boxes
 
 class Shape
 {
@@ -20,6 +20,10 @@ public:
     std::string const& name() const;
 
     Material const& material() const;
+
+    glm::mat4x4 const& matrix() const;
+
+    void setmatrix(glm::mat4x4 const& newmatrix);
 
     virtual float area() const = 0;
 
