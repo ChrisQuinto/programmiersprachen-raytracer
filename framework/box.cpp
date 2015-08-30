@@ -65,17 +65,7 @@ glm::vec3 const& Box::max() const {
     return (width * length * height);
 }
 
-/* virtual */ std::ostream& Box::print(std::ostream& os) const {
-    os << "Box: \n";
-    Shape::print(os);
-    os << "Minimum: (" << min().x << "," << min().y << "," << min().z << ") \n";
-    os << "Maximum: (" << max().x << "," << max().y << "," << max().z << ") \n";
-    os << "Flaecheninhalt: " << area() << "\n";
-    os << "Volumen: " << volume() << "\n\n";
-    return os;
-}
-
-Hit Box::intersect(Ray const& ray) {
+/* virtual */ Hit Box::intersect(Ray const& ray) {
 
     float t1 = (max_.x - ray.origin_.x) * ray.inv_direction_.x;
     float t2 = (min_.x - ray.origin_.x) * ray.inv_direction_.x;
@@ -161,4 +151,18 @@ Hit Box::intersect(Ray const& ray) {
     }
 
     return b_hit;
+}
+
+/* virtual */ void Box::translate(glm::vec3 const& move) {
+    //what to do? what to do?
+}
+
+/* virtual */ std::ostream& Box::print(std::ostream& os) const {
+    os << "Box: \n";
+    Shape::print(os);
+    os << "Minimum: (" << min().x << "," << min().y << "," << min().z << ") \n";
+    os << "Maximum: (" << max().x << "," << max().y << "," << max().z << ") \n";
+    os << "Flaecheninhalt: " << area() << "\n";
+    os << "Volumen: " << volume() << "\n\n";
+    return os;
 }

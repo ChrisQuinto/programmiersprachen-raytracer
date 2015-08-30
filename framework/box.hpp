@@ -25,6 +25,8 @@ public:
 
     /* virtual */ Hit intersect(Ray const& ray) override;
 
+    /* virtual */ void translate(glm::vec3 const& move) override;
+
     /* virtual */ std::ostream& print(std::ostream& os) const override;
 
 private:
