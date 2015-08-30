@@ -144,7 +144,12 @@ Color Renderer::shade(Ray const& ray, Hit const& hit, Color color)
     if(c[0].r == 0){
       //std::cout << amb << std::endl;
       return amb;}
-
+          else {
+          for (std::vector<Color>::iterator k = c.begin();k != c.end();++k){
+              kd_total += *k;
+              //std::cout << kd_total << std::endl;
+            }
+        }
     }
     else {
           for (std::vector<Color>::iterator k = c.begin();k != c.end();++k){
