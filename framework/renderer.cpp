@@ -37,6 +37,7 @@ Renderer::Renderer(std::shared_ptr<Scene> scene) :
   ppm_.save();
 }*/
 
+
 void Renderer::render()
 {
     //z ist Entfernung der Camera zur Scene aus Winkel und Aufloesung berechnet
@@ -83,6 +84,8 @@ void Renderer::render()
 
 Color Renderer::shade(Ray const& ray, Hit const& hit, Color color)
 {
+  glm::vec3 norm = glm::normalize(hit.normal_);
+  float shadowbias = 0.009 ;
 
   std::vector<Color> c{};
   Color amb;
@@ -96,8 +99,8 @@ Color Renderer::shade(Ray const& ray, Hit const& hit, Color color)
 
   for (std::vector<std::shared_ptr<Light>>::iterator i = scene_->lights.begin();i != scene_->lights.end();++i){
 
-    Ray sunray(hit.intersection_,(*i)->pos() - hit.intersection_ );
-    Color c_l;
+    Ray sunray(hit.intersection_ + (shadowbias*norm) ,(*i)->pos() - (hit.intersection_ + (shadowbias * norm) ));
+    Color c_l = {0.0,0.0,0.0};
 
     for (std::vector<std::shared_ptr<Shape>>::iterator j = scene_->shapes_ptr.begin();j != scene_->shapes_ptr.end();++j){
 
@@ -107,21 +110,26 @@ Color Renderer::shade(Ray const& ray, Hit const& hit, Color color)
 
       if(light_hit.distance_ < (sqrt((pow(sunvec.x, 2) + pow(sunvec.y, 2) + pow(sunvec.z,2))))) {
             c.empty();
+            //std::cout << "help" <<std::endl;
+            c_l = {0.0,0.0,0.0};
             break;
           }
 
       else {
 
         glm::vec3 sunvec = glm::normalize((*i)->pos() - hit.intersection_);
-        glm::vec3 norm = glm::normalize(hit.normal_);
+
         float winkel = sqrt(pow(glm::dot(norm, sunvec), 2.0f));
+
 
         c_l.r = (*i)->dl().r * winkel;
         c_l.g = (*i)->dl().g * winkel;
         c_l.b = (*i)->dl().b * winkel;
 
-        //c_l = (*i)->dl() * winkel ;
-        //std::cout << c_l << std::endl;
+
+
+                  //c_l = (*i)->dl() * winkel ;
+        //std::cout << winkel << std::endl;
 
 
       }
@@ -132,10 +140,11 @@ Color Renderer::shade(Ray const& ray, Hit const& hit, Color color)
   }
 
   csize = c.size();
+  if (csize == 1){
+    if(c[0].r == 0){
+      std::cout << amb << std::endl;
+      return amb;}
 
-  if(c[0].r == 0){
-    return amb;
-    //std::cout << amb << std::endl;
     }
     else {
           for (std::vector<Color>::iterator k = c.begin();k != c.end();++k){
@@ -145,7 +154,7 @@ Color Renderer::shade(Ray const& ray, Hit const& hit, Color color)
         }
   //std::cout << csize << std::endl;
 
-        //kd_total = kd_total/sizeof(c);
+        //kd_total = kd_total/c.size();
 
   color = (kd_total * color) + amb;
 
