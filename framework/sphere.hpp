@@ -17,7 +17,7 @@ public:
 
     float radius() const;
 
-    bool intersect(Ray const& ray, float& distance) const;
+    void translate(glm::vec3 const& newcenter);
 
     /* virtual */ float area() const override;
 

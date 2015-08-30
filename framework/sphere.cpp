@@ -61,6 +61,10 @@ float Sphere::radius() const {
     return s_hit;
 }
 
+void Sphere::translate(glm::vec3 const& newcenter) {
+    center_ = newcenter;
+}
+
 /* virtual */ std::ostream& Sphere::print(std::ostream& os) const {
     os << "Sphere: \n";
     Shape::print(os); //Erweiterung
