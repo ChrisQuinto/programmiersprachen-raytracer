@@ -61,7 +61,11 @@ float Sphere::radius() const {
     return s_hit;
 }
 
-void Sphere::translate(glm::vec3 const& newcenter) {
+void Sphere::setcenter(glm::vec3 const& newcenter) {
+    center_ = newcenter;
+}
+
+void Sphere::translate(glm::vec3 const& move) {
     center_ = newcenter;
 }
 

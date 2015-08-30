@@ -17,13 +17,15 @@ public:
 
     float radius() const;
 
-    void translate(glm::vec3 const& newcenter);
+    void setcenter(glm::vec3 const& newcenter);
 
     /* virtual */ float area() const override;
 
     /* virtual */ float volume() const override;
 
     /* virtual */ Hit intersect(Ray const& ray) override;
+
+    /* virtual */ void translate(glm::vec3 const& move) override;
 
     /* virtual */ std::ostream& print(std::ostream& os) const override;
 
