@@ -1,5 +1,5 @@
 #CAMERA
-camera eye 100.0 300 300
+camera eye 45.0 700 700
 
 #RENDERER
 renderer test.ppm
@@ -29,6 +29,7 @@ define amblight .3 .4 .5
 
 #LIGHT
 define light sun 0 0 -125 1 1 1
+define light sun2 100 0 -125 1 1 1
 
 #BOXES boxname p1 p2 mat
 define shape box b0 -130 -100 -100 130 -120 -400 white
