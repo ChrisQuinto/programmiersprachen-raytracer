@@ -88,9 +88,13 @@ TEST_CASE("test sphere", "[test sphere]")
     std::cout << sphere1;
 }
 
-/*TEST_CASE("test intersectRaySphere", "[test intersectRaySphere]")
+TEST_CASE("test intersectRaySphere", "[test intersectRaySphere]")
 {
     std::cout << std::endl << "Intersect-Ray-Sphere Tests: " << std::endl;
+
+    glm::vec3 ray_origin0(1.0,1.0,1.0);
+    glm::vec3 ray_direction0(1.1,1.1,1.1);
+    Ray ray0{ray_origin0,ray_direction0};
 
     glm::vec3 ray_origin1(0.0,0.0,0.0);
     glm::vec3 ray_direction1(0.0,0.0,1.0);
@@ -100,26 +104,36 @@ TEST_CASE("test sphere", "[test sphere]")
     glm::vec3 ray_direction2(4.0,2.0,6.0);
     Ray ray2{ray_origin2,ray_direction2};
 
-    float sphere_radius(1.0);
+    float sphere_radius0(1.0);
     Material mat{};
     glm::vec3 sphere_center0(0.0,0.0,5.0);
     std::string a = "sphere0";
-    Sphere sphere0{sphere_center0, sphere_radius, a, mat};
+    Sphere sphere0{sphere_center0, sphere_radius0, a, mat};
 
     glm::vec3 sphere_center1(3.0,1.5,4.5);
     std::string b = "sphere1";
-    Sphere sphere1{sphere_center1, sphere_radius, b, mat};
+    Sphere sphere1{sphere_center1, sphere_radius0, b, mat};
 
     glm::vec3 sphere_center2(7.0,7.0,7.0);
     std::string c = "sphere2";
-    Sphere sphere2{sphere_center2, sphere_radius, c, mat};
+    Sphere sphere2{sphere_center2, sphere_radius0, c, mat};
 
-    float distance(0.0);
-    REQUIRE(sphere0.intersect(ray1, distance) == true);
-    REQUIRE(distance == Approx(4.0f));
-    REQUIRE(sphere1.intersect(ray2, distance) == true);
-    REQUIRE(sphere2.intersect(ray2, distance) == false);
-}*/
+    glm::vec3 sphere_center3(1.0,1.0,1.0);
+    std::string d = "sphere3";
+    Sphere sphere3{sphere_center3, sphere_radius0, d, mat};
+
+    Hit s_hit0 = sphere0.intersect(ray1);
+    std::cout << s_hit0;
+    Hit s_hit1 = sphere1.intersect(ray1);
+    std::cout << s_hit1;
+    Hit s_hit2 = sphere2.intersect(ray0);
+    std::cout << s_hit2;
+    Hit s_hit3 = sphere3.intersect(ray0);
+    std::cout << s_hit3;
+    REQUIRE(s_hit0.hit_ == true);
+    REQUIRE(s_hit1.hit_ == false);
+    REQUIRE(s_hit2.hit_ == true);
+}
 
 TEST_CASE("test intersectRayBox", "[test intersectRayBox]")
 {
@@ -149,20 +163,20 @@ TEST_CASE("test intersectRayBox", "[test intersectRayBox]")
     glm::vec3 box_max2(6.0,8.0,6.0);
     Box box2{box_min2, box_max2, c, mat};
 
-    Hit hit0 = box0.intersect(ray0);
-    std::cout << hit0;
-    Hit hit1 = box0.intersect(ray1);
-    std::cout << hit1;
-    Hit hit2 = box1.intersect(ray0);
-    std::cout << hit2;
-    Hit hit3 = box1.intersect(ray1);
-    std::cout << hit3;
-    Hit hit4 = box2.intersect(ray0);
-    std::cout << hit4;
-    Hit hit5 = box2.intersect(ray1);
-    std::cout << hit5;
-    REQUIRE(hit0.hit_ == true);
-    REQUIRE(hit1.hit_ == false);
+    Hit b_hit0 = box0.intersect(ray0);
+    std::cout << b_hit0;
+    Hit b_hit1 = box0.intersect(ray1);
+    std::cout << b_hit1;
+    Hit b_hit2 = box1.intersect(ray0);
+    std::cout << b_hit2;
+    Hit b_hit3 = box1.intersect(ray1);
+    std::cout << b_hit3;
+    Hit b_hit4 = box2.intersect(ray0);
+    std::cout << b_hit4;
+    Hit b_hit5 = box2.intersect(ray1);
+    std::cout << b_hit5;
+    REQUIRE(b_hit0.hit_ == true);
+    REQUIRE(b_hit1.hit_ == false);
 }
 
 TEST_CASE("test light", "[test light]"){
