@@ -65,8 +65,14 @@ void Sphere::setcenter(glm::vec3 const& newcenter) {
     center_ = newcenter;
 }
 
-void Sphere::translate(glm::vec3 const& move) {
-    center_ = newcenter;
+/* virtual */ void Sphere::translate(glm::vec3 const& move) {
+    //get the move vector in the matrix and set the new matrix
+    glm::mat4x4 movematrix{1,0,0,0,
+                           0,1,0,0,
+                           0,0,1,0,
+             move.x,move.y,move.z,1
+    };
+    setmatrix(matrix() * movematrix);
 }
 
 /* virtual */ std::ostream& Sphere::print(std::ostream& os) const {
