@@ -90,18 +90,18 @@ TEST_CASE("test sphere", "[test sphere]")
 
 TEST_CASE("test intersectRaySphere", "[test intersectRaySphere]")
 {
-    std::cout << std::endl << "Intersect-Ray-Sphere Tests: " << std::endl;
+    std::cout << "Intersect-Ray-Sphere Tests: " << std::endl;
 
     glm::vec3 ray_origin0(1.0,1.0,1.0);
-    glm::vec3 ray_direction0(1.1,1.1,1.1);
+    glm::vec3 ray_direction0(-0.9,-0.9,-0.9);
     Ray ray0{ray_origin0,ray_direction0};
 
     glm::vec3 ray_origin1(0.0,0.0,0.0);
     glm::vec3 ray_direction1(0.0,0.0,1.0);
     Ray ray1{ray_origin1,ray_direction1};
 
-    glm::vec3 ray_origin2(2.0,1.0,3.0);
-    glm::vec3 ray_direction2(4.0,2.0,6.0);
+    glm::vec3 ray_origin2(1.0,1.0,1.0);
+    glm::vec3 ray_direction2(1.1,1.1,1.1);
     Ray ray2{ray_origin2,ray_direction2};
 
     float sphere_radius0(1.0);
@@ -126,18 +126,19 @@ TEST_CASE("test intersectRaySphere", "[test intersectRaySphere]")
     std::cout << s_hit0;
     Hit s_hit1 = sphere1.intersect(ray1);
     std::cout << s_hit1;
-    Hit s_hit2 = sphere2.intersect(ray0);
+    Hit s_hit2 = sphere2.intersect(ray2);
     std::cout << s_hit2;
     Hit s_hit3 = sphere3.intersect(ray0);
     std::cout << s_hit3;
     REQUIRE(s_hit0.hit_ == true);
     REQUIRE(s_hit1.hit_ == false);
     REQUIRE(s_hit2.hit_ == true);
+    REQUIRE(s_hit3.hit_ == true);
 }
 
 TEST_CASE("test intersectRayBox", "[test intersectRayBox]")
 {
-    std::cout << "Intersect-Ray-Box Tests: " << std::endl;
+    std::cout << std::endl << "Intersect-Ray-Box Tests: " << std::endl;
 
     glm::vec3 ray_origin0(0.0,0.0,0.0);
     glm::vec3 ray_direction0(1.0,1.0,1.0);
