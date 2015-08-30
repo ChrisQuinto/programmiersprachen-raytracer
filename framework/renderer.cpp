@@ -85,7 +85,7 @@ void Renderer::render()
 Color Renderer::shade(Ray const& ray, Hit const& hit, Color color)
 {
   glm::vec3 norm = glm::normalize(hit.normal_);
-  float shadowbias = 0.009 ;
+  float shadowbias = 0.009f ;
 
   std::vector<Color> c{};
   Color amb;
