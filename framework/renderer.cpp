@@ -142,7 +142,7 @@ Color Renderer::shade(Ray const& ray, Hit const& hit, Color color)
   csize = c.size();
   if (csize == 1){
     if(c[0].r == 0){
-      std::cout << amb << std::endl;
+      //std::cout << amb << std::endl;
       return amb;}
 
     }
