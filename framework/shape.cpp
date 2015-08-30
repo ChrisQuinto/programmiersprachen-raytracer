@@ -2,13 +2,21 @@
 
 Shape::Shape() :
     name_("defaultshape"),
-    material_{Material{}} {
+    material_{Material{}},
+    matrix_{glm::mat4x4{1,0,0,0,
+                        0,1,0,0,
+                        0,0,1,0,
+                        0,0,0,1}} {
         // std::cout << "Default-Konstruktor-Aufruf fuer Shape: " << name() << "\n";
     }
 
 Shape::Shape(std::string const& n, Material const& m) :
     name_(n),
-    material_{m} {
+    material_{m},
+    matrix_{glm::mat4x4{1,0,0,0,
+                        0,1,0,0,
+                        0,0,1,0,
+                        0,0,0,1}} {
         // std::cout << "Konstruktor-Aufruf fuer Shape: " << name() << "\n";
     }
 
