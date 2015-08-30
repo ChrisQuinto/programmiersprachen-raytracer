@@ -85,7 +85,7 @@ void Renderer::render()
 Color Renderer::shade(Ray const& ray, Hit const& hit, Color color)
 {
   glm::vec3 norm = glm::normalize(hit.normal_);
-  float shadowbias = 0.009f ;
+  float shadowbias = 0.009 ;
 
   std::vector<Color> c{};
   Color amb;
@@ -139,9 +139,10 @@ Color Renderer::shade(Ray const& ray, Hit const& hit, Color color)
 
   }
 
+  Color black;
   csize = c.size();
   if (csize == 1){
-    if(c[0].r == 0){
+    if(c[0] == black){
       //std::cout << amb << std::endl;
       return amb;}
           else {
