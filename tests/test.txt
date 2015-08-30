@@ -1,5 +1,5 @@
 #CAMERA
-camera eye 100.0 300 300
+camera eye 45.0 500 500
 
 #RENDERER
 renderer test.ppm
@@ -29,25 +29,26 @@ define amblight .3 .4 .5
 
 #LIGHT
 define light sun 0 0 -125 1 1 1
+define light sun2 100 0 -125 1 1 1
 
 #BOXES boxname p1 p2 mat
 define shape box b0 -130 -100 -100 130 -120 -400 white
 
-define shape box b1 -30 20 -200 -10 40 -150 cyan
-define shape box b2 10 20 -200 30 40 -150 azure
-define shape box b3 -30 -10 -200 -10 10 -150 azure
-define shape box b4 10 -10 -200 30 10 -150 blue
-define shape box b5 -30 -40 -200 -10 -20 -150 blue
-define shape box b6 10 -40 -200 30 -20 -150 darkblue
+define shape box b1 -30 20 -200 -10 40 -250 cyan
+define shape box b2 10 20 -200 30 40 -250 azure
+define shape box b3 -30 -10 -200 -10 10 -250 azure
+define shape box b4 10 -10 -200 30 10 -250 blue
+define shape box b5 -30 -40 -200 -10 -20 -250 blue
+define shape box b6 10 -40 -200 30 -20 -250 darkblue
 
 #SPHERES spherename pos r mat
-define shape sphere sp0 0 0 -400 150 orange
+define shape sphere sp0 0 0 -800 150 orange
 
-define shape sphere sp1 90 0 -150 20 red
-define shape sphere sp2 -90 0 -150 20 red
-define shape sphere sp3 70 70 -150 20 yellow
-define shape sphere sp4 -70 70 -150 20 yellow
-define shape sphere sp5 0 90 -150 20 purple
-define shape sphere sp6 0 -90 -150 20 purple
-define shape sphere sp7 70 -70 -150 20 gold
-define shape sphere sp8 -70 -70 -150 20 gold
+define shape sphere sp1 90 0 -400 20 red
+define shape sphere sp2 -90 0 -400 20 red
+define shape sphere sp3 70 70 -400 20 yellow
+define shape sphere sp4 -70 70 -400 20 yellow
+define shape sphere sp5 0 90 -400 20 purple
+define shape sphere sp6 0 -90 -400 20 purple
+define shape sphere sp7 70 -70 -400 20 gold
+define shape sphere sp8 -70 -70 -400 20 gold
