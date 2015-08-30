@@ -90,7 +90,7 @@ Color Renderer::shade(Ray const& ray, Hit const& hit, Color color)
   amb.g = (*hit.sptr_).material().ka().g * (*scene_).amblight.g;
   amb.b = (*hit.sptr_).material().ka().b * (*scene_).amblight.b;
   Color kd_total (0.0,0.0,0.0);
-  int csize = c.size();
+  size_t csize = c.size();
   //std::cout << csize << std::endl;
 
 
@@ -113,8 +113,8 @@ Color Renderer::shade(Ray const& ray, Hit const& hit, Color color)
       else {
 
         glm::vec3 sunvec = glm::normalize((*i)->pos() - hit.intersection_);
-        hit.normal_ = glm::normalize(hit.normal_);
-        float winkel = sqrt(pow(glm::dot(hit.normal_, sunvec), 2.0));
+        glm::vec3 norm = glm::normalize(hit.normal_);
+        float winkel = sqrt(pow(glm::dot(norm, sunvec), 2.0f));
 
         c_l.r = (*i)->dl().r * winkel;
         c_l.g = (*i)->dl().g * winkel;
