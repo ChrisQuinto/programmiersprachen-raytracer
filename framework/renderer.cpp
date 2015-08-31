@@ -65,7 +65,7 @@ void Renderer::render()
 
                 Color color = (*first_hit).material().kd();
                 //std::cout << ray <<' ' << hit << ' ' << color << std::endl;
-                p.color = shade(ray, hit, color);
+                p.color = shade(ray, hit);
                 //std::cout << color << std::endl;
               }
             }
@@ -82,89 +82,78 @@ void Renderer::render()
   ppm_.save();
 }
 
-Color Renderer::shade(Ray const& ray, Hit const& hit, Color color)
+Color Renderer::shade(Ray const& ray, Hit const& hit)
 {
-  glm::vec3 norm = glm::normalize(hit.normal_);
+  Color kd = (*hit.sptr_).material().kd();
+  Color ks = (*hit.sptr_).material().ks();
+  Color ka = (*hit.sptr_).material().ka();
+  Color ip;
+  Color ld_ls;
+  Color l;
+
+  float winkela;
+  float winkelb;
   float shadowbias = 0.009f ;
 
-  std::vector<Color> c{};
-  Color amb;
-  amb.r = (*hit.sptr_).material().ka().r * (*scene_).amblight.r;
-  amb.g = (*hit.sptr_).material().ka().g * (*scene_).amblight.g;
-  amb.b = (*hit.sptr_).material().ka().b * (*scene_).amblight.b;
-  Color kd_total (0.0,0.0,0.0);
-  size_t csize = c.size();
-  //std::cout << csize << std::endl;
+  std::vector<Color> ip_vec;
+  std::vector<float> wa_vec;
+  std::vector<float> wb_vec;
 
+
+  glm::vec3 norm = glm::normalize(hit.normal_);
+  glm::vec3 rref;
+  glm::vec3 ray_inv_dir = glm::normalize(-ray.direction_);
+
+  Color la = ka * (*scene_).amblight;;
 
   for (std::vector<std::shared_ptr<Light>>::iterator i = scene_->lights.begin();i != scene_->lights.end();++i){
 
     Ray sunray(hit.intersection_ + (shadowbias*norm) ,(*i)->pos() - (hit.intersection_ + (shadowbias * norm) ));
-    Color c_l = {0.0,0.0,0.0};
 
     for (std::vector<std::shared_ptr<Shape>>::iterator j = scene_->shapes_ptr.begin();j != scene_->shapes_ptr.end();++j){
 
       Hit light_hit = (*j)->intersect(sunray);
       glm::vec3 sunvec = (*i)->pos() - hit.intersection_;
-      //glm::vec3 sunvec = glm::normalize((*i)->pos() - hit.intersection_);
 
       if(light_hit.distance_ < (sqrt((pow(sunvec.x, 2) + pow(sunvec.y, 2) + pow(sunvec.z,2))))) {
-            c.empty();
-            //std::cout << "help" <<std::endl;
-            c_l = {0.0,0.0,0.0};
-            break;
-          }
 
-      else {
+        ip = {0.0,0.0,0.0};
+        winkela = 0.0;
+        winkelb = 0.0;
 
-        glm::vec3 sunvec = glm::normalize((*i)->pos() - hit.intersection_);
+        break;
 
-        float winkel = sqrt(pow(glm::dot(norm, sunvec), 2.0f));
+      }
 
+      else{
 
-        c_l.r = (*i)->dl().r * winkel;
-        c_l.g = (*i)->dl().g * winkel;
-        c_l.b = (*i)->dl().b * winkel;
+        ip = (*i)->dl();
+        glm::vec3 norm_sunvec = glm::normalize(sunvec);
+        winkela = sqrt(pow(glm::dot(norm, norm_sunvec),2));
+        //winkelb = pow(glm::dot(ray_inv_dir, sunvec))-(2*winkela)), (*hit.sptr_).material().m() );
 
-
-
-                  //c_l = (*i)->dl() * winkel ;
-        //std::cout << winkel << std::endl;
-
+        rref = 2.0f * winkela * norm - norm_sunvec;
+        winkelb = sqrt(pow(glm::dot(rref,ray_inv_dir),2));
 
       }
 
     }
-    c.push_back(c_l);
+    //std::cout << ip << std::endl;
+    ip_vec.push_back(ip);
+    wa_vec.push_back(winkela);
+    wb_vec.push_back(pow(winkelb, hit.sptr_->material().m() ));
+
+  }
+  for(int i = 0; i != ip_vec.size(); ++i){
+
+    ld_ls = ld_ls + (ip_vec[i]*((kd*wa_vec[i]) + (ks*wb_vec[i])));
 
   }
 
-  Color black;
-  csize = c.size();
-  if (csize == 1){
-    if(c[0] == black){
-      //std::cout << amb << std::endl;
-      return amb;}
-          else {
-          for (std::vector<Color>::iterator k = c.begin();k != c.end();++k){
-              kd_total += *k;
-              //std::cout << kd_total << std::endl;
-            }
-        }
-    }
-    else {
-          for (std::vector<Color>::iterator k = c.begin();k != c.end();++k){
-              kd_total += *k;
-              //std::cout << kd_total << std::endl;
-            }
-        }
-  //std::cout << csize << std::endl;
+l = ld_ls + la;
 
-        //kd_total = kd_total/c.size();
+return l;
 
-  color = (kd_total * color) + amb;
-
-  return color;
 }
 
 void Renderer::write(Pixel const& p)
