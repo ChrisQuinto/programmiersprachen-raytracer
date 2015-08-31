@@ -118,19 +118,19 @@ glm::vec3 const& Box::max() const {
         };
 
         glm::vec3 normal{std::numeric_limits<float>::infinity(),std::numeric_limits<float>::infinity(),std::numeric_limits<float>::infinity()};
-
+        float bias = 0.0009;
         //getting the normal vec on the side of the intersection
-        if (abs(b_hit.intersection_.x - max_.x) < 0.0001) {
+        if (abs(b_hit.intersection_.x - max_.x) < bias) {
             normal = glm::vec3{1.0, 0.0, 0.0};
-        } else if (abs(b_hit.intersection_.x - min_.x) < 0.0001) {
+        } else if (abs(b_hit.intersection_.x - min_.x) < bias) {
             normal = glm::vec3{-1.0, 0.0, 0.0};
-        } else if (abs(b_hit.intersection_.y - max_.y) < 0.0001) {
+        } else if (abs(b_hit.intersection_.y - max_.y) < bias) {
             normal = glm::vec3{0.0, 1.0, 0.0};
-        } else if (abs(b_hit.intersection_.y - min_.y) < 0.0001) {
+        } else if (abs(b_hit.intersection_.y - min_.y) < bias) {
             normal = glm::vec3{0.0, -1.0, 0.0};
-        } else if (abs(b_hit.intersection_.z - max_.z) < 0.0001) {
+        } else if (abs(b_hit.intersection_.z - max_.z) < bias) {
             normal = glm::vec3{0.0, 0.0, 1.0};
-        } else if (abs(b_hit.intersection_.z - min_.z) < 0.0001) {
+        } else if (abs(b_hit.intersection_.z - min_.z) < bias) {
             normal = glm::vec3{0.0, 0.0, -1.0};
         }
 
