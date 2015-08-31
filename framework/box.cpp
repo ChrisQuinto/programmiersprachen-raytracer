@@ -118,7 +118,7 @@ glm::vec3 const& Box::max() const {
         };
 
         glm::vec3 normal{std::numeric_limits<float>::infinity(),std::numeric_limits<float>::infinity(),std::numeric_limits<float>::infinity()};
-        float bias = 0.0009;
+        float bias = 0.0009f;
         //getting the normal vec on the side of the intersection
         if (abs(b_hit.intersection_.x - max_.x) < bias) {
             normal = glm::vec3{1.0, 0.0, 0.0};
