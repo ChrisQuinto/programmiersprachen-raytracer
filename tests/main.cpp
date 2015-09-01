@@ -210,10 +210,10 @@ TEST_CASE("test camera", "[test camera]"){
     //std::cout << cam1.castray(d) << std::endl;
 }
 
-TEST_CASE("sdfloader_material", "[sdfloader]"){
+/*TEST_CASE("sdfloader_material", "[sdfloader]"){
     Sdfloader loader{"./materials.txt"};
     std::shared_ptr<Scene> s = loader.loadscene("./materials.txt");
-}
+}*/
 
 /*TEST_CASE("sdfloader Test", "[sdfloader test]"){
     Sdfloader loader{"./test.txt"};
@@ -246,21 +246,21 @@ TEST_CASE("animation Test", "[animation test]"){
     std::string n = "batlight";
     Color c{1.0,1.0,1.0};
     int j = -200;
-    for (int i = 0; i < 11; ++i)
+    for (int i = 0; i < 80; ++i)
     {
         glm::vec3 pos{j,100,-2500};
         std::shared_ptr<Light> lightptr = std::make_shared<Light>(Light{n,pos,c});
 
-        s->filename = "frame" + std::to_string(i) + ".ppm";
+        s->filename = "batframeb" + std::to_string(i) + ".ppm";
         s->lights.clear();
         s->lights.push_back(lightptr);
 
         Renderer renderer(s);
         renderer.render();
 
-        std::cout << "\nframe" << i << "done.\n";
+        std::cout << "\nbatframe" << i << "done.\n";
 
-        j += 10;
+        j += 5;
     }
 }
 
