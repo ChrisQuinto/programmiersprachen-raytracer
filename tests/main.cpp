@@ -232,11 +232,36 @@ TEST_CASE("sdfloader_material", "[sdfloader]"){
     //std::cout << *s.lights[0];
 }*/
 
-TEST_CASE("renderer Test", "[renderer test]"){
+/*TEST_CASE("renderer Test", "[renderer test]"){
     Sdfloader loader{"./test.txt"};
     std::shared_ptr<Scene> s = loader.loadscene("./test.txt");
     Renderer renderer(s);
     renderer.render();
+}*/
+
+TEST_CASE("animation Test", "[animation test]"){
+    Sdfloader loader{"./test.txt"};
+    std::shared_ptr<Scene> s = loader.loadscene("./test.txt");
+
+    std::string n = "batlight";
+    Color c{1.0,1.0,1.0};
+    int j = -200;
+    for (int i = 0; i < 11; ++i)
+    {
+        glm::vec3 pos{j,100,-2500};
+        std::shared_ptr<Light> lightptr = std::make_shared<Light>(Light{n,pos,c});
+
+        s->filename = "frame" + std::to_string(i) + ".ppm";
+        s->lights.clear();
+        s->lights.push_back(lightptr);
+
+        Renderer renderer(s);
+        renderer.render();
+
+        std::cout << "\nframe" << i << "done.\n";
+
+        j += 10;
+    }
 }
 
 
