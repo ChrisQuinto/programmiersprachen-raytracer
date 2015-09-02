@@ -232,14 +232,14 @@ TEST_CASE("test camera", "[test camera]"){
     //std::cout << *s.lights[0];
 }*/
 
-/*TEST_CASE("renderer Test", "[renderer test]"){
+TEST_CASE("renderer Test", "[renderer test]"){
     Sdfloader loader{"./test.txt"};
     std::shared_ptr<Scene> s = loader.loadscene("./test.txt");
     Renderer renderer(s);
     renderer.render();
-}*/
+}
 
-TEST_CASE("animation Test", "[animation test]"){
+/*TEST_CASE("animation Test", "[animation test]"){
     Sdfloader loader{"./test.txt"};
     std::shared_ptr<Scene> s = loader.loadscene("./test.txt");
 
@@ -262,7 +262,7 @@ TEST_CASE("animation Test", "[animation test]"){
 
         j += 5;
     }
-}
+}*/
 
 
 // AUFGABENBLATT 6
